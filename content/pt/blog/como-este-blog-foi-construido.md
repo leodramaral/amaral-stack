@@ -2,6 +2,7 @@
 title: "Como Este Blog Foi Construído"
 date: 2025-05-02T10:00:00-03:00
 draft: false
+translationKey: "how-this-blog-was-built"
 tags: ["hugo", "blog", "ia", "meta"]
 description: "A história por trás do Amaral Stack — como usei Hugo, o tema enervoid e a IA GLM-5.1 para montar este blog do zero."
 image: "perfil.jpg"
@@ -21,13 +22,17 @@ Todo o código, a estrutura, os overrides de template, o suporte a i18n, a palet
 
 O fluxo funcionava assim: eu descrevia o que queria, o modelo implementava, eu validava com `hugo server` e decidia se aprovava ou pedia ajustes. Cada fase gerava um commit git limpo e semântico. Isso me permitiu manter controle total sobre o que estava sendo feito, mesmo sem escrever manualmente cada linha de template.
 
+Nem tudo saiu perfeito na primeira passada. Quando publiquei este post, o botão **Blog** no header não levava para a listagem correta: o conteúdo estava em `content/pt` e `content/en`, mas o Hugo ainda não sabia que cada pasta era o diretório de conteúdo de um idioma. O resultado eram URLs duplicadas, como `/pt/pt/blog/`, enquanto o menu apontava para `/pt/blog/`.
+
+Tentei uma correção com o GLM-5.1, mas a solução não ficou boa e precisei reverter os commits. A troca foi assumir uma configuração multilíngue mais explícita, com `contentDir` por idioma e `pageRef` no menu, deixando o Hugo resolver a rota certa para cada língua.
+
 ## O que o blog suporta
 
 Dependendo do tipo de conteúdo que eu for publicar, o blog já está preparado para renderizar tudo bonito. Aqui vão alguns exemplos:
 
 ### Syntax Highlighting
 
-Hugo usa o Chroma por baixo do panos, com o tema Monokai. Qualquer bloco de código com a linguagem especificada ganha highlighting automático:
+Hugo usa o Chroma por baixo dos panos, com o tema Monokai. Qualquer bloco de código com a linguagem especificada ganha highlighting automático:
 
 ```python
 def fibonacci(n):

@@ -19,14 +19,22 @@
 
           <div class="flex items-center gap-1">
             {{ $currentLang := site.Language.Lang }}
+            {{ $currentPage := . }}
             {{ range site.Languages }}
+            {{ $targetLang := .Lang }}
+            {{ $targetURL := printf "/%s/" $targetLang | relURL }}
+            {{ range $currentPage.AllTranslations }}
+            {{ if eq .Language.Lang $targetLang }}
+            {{ $targetURL = .RelPermalink }}
+            {{ end }}
+            {{ end }}
             {{ if eq .Lang $currentLang }}
             <span
               class="px-2 py-1 text-xs sm:text-sm border border-gray-500 rounded-sm text-white bg-gray-800">
               {{ .LanguageName }}
             </span>
             {{ else }}
-            <a href="/{{ .Lang }}/"
+            <a href="{{ $targetURL }}" data-no-swup
               class="px-2 py-1 text-xs sm:text-sm border border-gray-700 rounded-sm text-gray-400 hover:text-white hover:border-gray-500 transition-colors">
               {{ .LanguageName }}
             </a>
@@ -61,13 +69,21 @@
         {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
         <div class="flex items-center gap-1 mt-3 pt-3 border-t border-gray-800">
           {{ $currentLang := site.Language.Lang }}
+          {{ $currentPage := . }}
           {{ range site.Languages }}
+          {{ $targetLang := .Lang }}
+          {{ $targetURL := printf "/%s/" $targetLang | relURL }}
+          {{ range $currentPage.AllTranslations }}
+          {{ if eq .Language.Lang $targetLang }}
+          {{ $targetURL = .RelPermalink }}
+          {{ end }}
+          {{ end }}
           {{ if eq .Lang $currentLang }}
           <span class="px-2 py-1 text-xs sm:text-sm border border-gray-500 rounded-sm text-white bg-gray-800">
             {{ .LanguageName }}
           </span>
           {{ else }}
-          <a href="/{{ .Lang }}/"
+          <a href="{{ $targetURL }}" data-no-swup
             class="px-2 py-1 text-xs sm:text-sm border border-gray-700 rounded-sm text-gray-400 hover:text-white transition-colors">
             {{ .LanguageName }}
           </a>

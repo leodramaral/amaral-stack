@@ -19,7 +19,7 @@ Expects: (dict "menuID" "main" "page" .)
     {{- end -}}
 
     <li>
-      <a {{- range $k, $v :=$attrs }} {{- with $v }} {{- printf " %s=%q" $k $v | safeHTMLAttr }} {{- end }} {{- end -}}
+      <a{{ range $k, $v := $attrs }}{{ with $v }}{{ printf " %s=%q" $k $v | safeHTMLAttr }}{{ end }}{{ end }}
         class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-200 hover:text-white transition-colors duration-200">
         <span class="relative inline-block">
           <span>{{ .Name }}</span>

@@ -2,6 +2,7 @@
 title: "How This Blog Was Built"
 date: 2025-05-02T10:00:00-03:00
 draft: false
+translationKey: "how-this-blog-was-built"
 tags: ["hugo", "blog", "ai", "meta"]
 description: "The story behind Amaral Stack — how I used Hugo, the enervoid theme, and GLM-5.1 AI to build this blog from scratch."
 image: "perfil.jpg"
@@ -20,6 +21,10 @@ But the real differentiator here was the creation process.
 All the code, the structure, the template overrides, i18n support, color palette, light/dark toggle — everything was built in partnership with the **GLM-5.1** model, from Zhipu AI. This wasn't a "copy and paste from prompts" situation. It was an iterative, phased process where each step was planned, executed, and manually approved before moving to the next.
 
 The workflow went like this: I described what I wanted, the model implemented it, I validated with `hugo server`, and decided whether to approve or request adjustments. Each phase produced a clean, semantic git commit. This allowed me to maintain full control over what was being done, even without manually writing every template line.
+
+Not everything worked perfectly on the first pass. When I published this post, the **Blog** button in the header did not open the correct listing: the content lived in `content/pt` and `content/en`, but Hugo had not been told that each folder was the content directory for a language. The result was duplicated URLs like `/pt/pt/blog/`, while the menu pointed to `/pt/blog/`.
+
+I tried fixing it with GLM-5.1, but the solution was not good enough and I had to revert the commits. The switch was to make the multilingual setup more explicit, with one `contentDir` per language and `pageRef` in the menu, letting Hugo resolve the right route for each language.
 
 ## What the Blog Supports
 

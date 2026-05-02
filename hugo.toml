@@ -1,9 +1,11 @@
 baseURL = '/'
 defaultContentLanguage = 'pt'
+defaultContentLanguageInSubdir = true
 theme = 'enervoid'
 
 [languages]
   [languages.pt]
+    contentDir = 'content/pt'
     languageCode = 'pt-br'
     languageName = 'BR'
     title = 'Amaral Stack'
@@ -29,6 +31,7 @@ theme = 'enervoid'
         icon = "devicon-twitter-original"
 
   [languages.en]
+    contentDir = 'content/en'
     languageCode = 'en-us'
     languageName = 'EN'
     title = 'Amaral Stack'
