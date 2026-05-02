@@ -1,0 +1,75 @@
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  let initialized = false;
+  let currentMermaidTheme = 'dark';
+
+  function getTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'light' ? 'default' : 'dark';
+  }
+
+  function renderMermaid() {
+    const contentArea = document.getElementById('swup') || document.body;
+    const mermaidBlocks = contentArea.querySelectorAll('.language-mermaid, .mermaid');
+
+    if (mermaidBlocks.length === 0) {
+      return;
+    }
+
+    const theme = getTheme();
+
+    if (!initialized || theme !== currentMermaidTheme) {
+      mermaid.initialize({ startOnLoad: false, theme: theme });
+      currentMermaidTheme = theme;
+      initialized = true;
+    }
+
+    mermaidBlocks.forEach(el => {
+      if (el.dataset.processed === 'true') {
+        const source = el.dataset.mermaidSource;
+        if (source) {
+          el.innerHTML = source;
+          el.removeAttribute('data-processed');
+        }
+      } else {
+        el.dataset.mermaidSource = el.textContent;
+      }
+    });
+
+    mermaid.run({ nodes: mermaidBlocks })
+      .catch(err => console.error("Mermaid rendering error:", err));
+  }
+
+  function renderMermaidWithRetry(maxRetries = 10, delay = 100) {
+    let attempts = 0;
+    const attempt = () => {
+      if (typeof mermaid.initialize === "function") {
+        renderMermaid();
+      } else if (attempts < maxRetries) {
+        attempts++;
+        setTimeout(attempt, delay);
+      }
+    };
+    attempt();
+  }
+
+  function setupSwupIntegration() {
+    if (window.swup) {
+      window.swup.hooks.on('page:view', () => {
+        setTimeout(() => renderMermaidWithRetry(3, 50), 50);
+      });
+    } else {
+      setTimeout(setupSwupIntegration, 100);
+    }
+  }
+
+  window.addEventListener('theme-changed', () => {
+    initialized = false;
+    renderMermaidWithRetry(3, 50);
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMermaidWithRetry();
+    setupSwupIntegration();
+  });
+</script>
