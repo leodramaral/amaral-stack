@@ -1,26 +1,57 @@
 baseURL = 'https://example.org/'
-languageCode = 'pt-br'
-title = 'Amaral Stack'
+defaultContentLanguage = 'pt'
 theme = 'enervoid'
 
-[menus]
-  [[menus.main]]
-    name = 'Blog'
-    pageRef = '/blog'
-    weight = 10
+[languages]
+  [languages.pt]
+    languageCode = 'pt-br'
+    languageName = 'BR'
+    title = 'Amaral Stack'
+    weight = 1
 
-[params]
-  avatar = "/perfil.jpg"
+    [languages.pt.menus]
+      [[languages.pt.menus.main]]
+        name = 'Blog'
+        pageRef = '/blog'
+        weight = 10
 
-  [[params.socials]]
-    link = "https://github.com/leandroamaral"
-    icon = "devicon-github-original"
-  [[params.socials]]
-    link = "https://linkedin.com/in/leandroamaral"
-    icon = "devicon-linkedin-plain"
-  [[params.socials]]
-    link = "https://x.com/leandroamaral"
-    icon = "devicon-twitter-original"
+    [languages.pt.params]
+      avatar = "/perfil.jpg"
+
+      [[languages.pt.params.socials]]
+        link = "https://github.com/leandroamaral"
+        icon = "devicon-github-original"
+      [[languages.pt.params.socials]]
+        link = "https://linkedin.com/in/leandroamaral"
+        icon = "devicon-linkedin-plain"
+      [[languages.pt.params.socials]]
+        link = "https://x.com/leandroamaral"
+        icon = "devicon-twitter-original"
+
+  [languages.en]
+    languageCode = 'en-us'
+    languageName = 'EN'
+    title = 'Amaral Stack'
+    weight = 2
+
+    [languages.en.menus]
+      [[languages.en.menus.main]]
+        name = 'Blog'
+        pageRef = '/blog'
+        weight = 10
+
+    [languages.en.params]
+      avatar = "/perfil.jpg"
+
+      [[languages.en.params.socials]]
+        link = "https://github.com/leandroamaral"
+        icon = "devicon-github-original"
+      [[languages.en.params.socials]]
+        link = "https://linkedin.com/in/leandroamaral"
+        icon = "devicon-linkedin-plain"
+      [[languages.en.params.socials]]
+        link = "https://x.com/leandroamaral"
+        icon = "devicon-twitter-original"
 
 [markup]
   [markup.goldmark]

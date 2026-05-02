@@ -1,0 +1,26 @@
+[about_me]
+other = "Sobre mim"
+
+[table_of_contents]
+other = "Sumário"
+
+[min_read]
+other = "min de leitura"
+
+[no_headings]
+other = "Sem seções."
+
+[items_under]
+other = "itens nesta seção."
+
+[no_entries]
+other = "Nenhuma publicação ainda."
+
+[all_rights]
+other = "Todos os direitos reservados."
+
+[made_with]
+other = "Feito com"
+
+[open_menu]
+other = "Abrir menu"

@@ -1,0 +1,26 @@
+[about_me]
+other = "About Me"
+
+[table_of_contents]
+other = "Table of contents"
+
+[min_read]
+other = "min read"
+
+[no_headings]
+other = "No headings."
+
+[items_under]
+other = "items under this folder."
+
+[no_entries]
+other = "No entries yet."
+
+[all_rights]
+other = "All rights reserved."
+
+[made_with]
+other = "Made with"
+
+[open_menu]
+other = "Open menu"
