@@ -1,22 +1,37 @@
 {{ define "main" }}
 
-<section class="relative border border-gray-200 bg-[#070709] rounded-sm p-8 md:p-12 text-gray-300">
+<section class="flex flex-col items-center justify-center text-center py-12 md:py-20">
 
-  <h1 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-blue-200 mb-6 tracking-wide">
-    {{ T "about_me" }}
+  <img src="{{ "perfil.jpg" | relURL }}" alt="Leandro Amaral"
+    class="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full border-4 border-blue-200/30 object-cover shadow-lg shadow-blue-200/10 mb-8" />
+
+  <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold text-white tracking-wide mb-3">
+    Leandro Amaral
   </h1>
 
-  <div class="space-y-6 sm:text-lg md:text-xl lg:text-2xl leading-relaxed [&_a]:text-blue-200
+  <p class="text-base sm:text-lg md:text-xl text-gray-400 font-mono mb-8">
+    <span class="text-gray-500">&lt;</span><span class="text-emerald-400">amaral</span> <span class="text-blue-200">stack</span><span class="text-gray-500">/&gt;</span>
+  </p>
+
+  <div class="max-w-xl space-y-4 text-gray-300 sm:text-lg md:text-xl leading-relaxed [&_a]:text-blue-200
             [&_a]:underline
             [&_a:hover]:text-blue-100
             [&_a]:transition-colors
             [&_a]:duration-200">
-
     {{ with site.GetPage "page" "about" }}
     {{ .Content }}
     {{ end }}
+  </div>
 
+  <div class="flex items-center gap-6 mt-10 text-gray-500">
+    {{ range site.Params.socials }}
+    <a href='{{ .link }}' target="_blank" rel="noopener"
+      class="transition-colors duration-200 hover:text-gray-200 text-xl">
+      <i class="{{ .icon }}"></i>
+    </a>
+    {{ end }}
   </div>
 
 </section>
+
 {{ end }}
