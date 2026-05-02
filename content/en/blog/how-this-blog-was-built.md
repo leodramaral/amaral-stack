@@ -3,28 +3,47 @@ title: "How This Blog Was Built"
 date: 2025-05-02T10:00:00-03:00
 draft: false
 translationKey: "how-this-blog-was-built"
-tags: ["hugo", "blog", "ai", "meta"]
+tags: ["hugo", "blog", "ai"]
 description: "The story behind Amaral Stack — how I used Hugo, the enervoid theme, and GLM-5.1 AI to build this blog from scratch."
-image: "perfil.jpg"
 ---
 
-Anyone in software development knows that setting up a technical blog seems simple, but it's actually one of those projects you keep putting off. I decided to change that and use the opportunity to test something I'd been wanting to explore: **building an entire project with the help of generative AI**.
+Anyone in software development knows that setting up a technical blog seems simple, but it's actually one of those projects you keep putting off. I had been trying to get this blog off the ground for a while, but the idea still needed to become execution.
+
+After working for a few months with **Codex**, I was looking for other models to test that were not **Claude Code**. One of the reasons is that I am using **OpenCode** and, for now, I want to keep working with it. That's when I decided to test **GLM-5.1** and use the blog as a practical project: small enough to move quickly, but complex enough to involve templates, i18n, visual theming, deployment, and technical content.
+
+The goal of the blog is not just to have a personal page online. I want to use this space to document studies, tests, and learnings from my new work project: building a system that will use a **local LLM** to enable conversations between users and general company data. Since this kind of solution involves architecture, security, UX, response evaluation, and integration with internal data, it made sense to have a place to record the process.
 
 ## The Stack
 
-The blog runs on **Hugo** (v0.146.0 extended), an absurdly fast static site generator. On top of it, I use the **enervoid** theme — minimal, with monospace typography and a terminal vibe I really like. Deployment is automatic via **GitHub Actions** to **GitHub Pages**.
+The blog runs on **Hugo** (v0.146.0 extended), an absurdly fast static site generator. The choice was pragmatic: I wanted something easy to maintain, cheap to host, versioned in Git, and not dependent on a database, admin panel, or production runtime. For a personal technical blog, well-generated static files solve almost everything.
+
+There was also a relearning aspect to it. I worked with **Golang** many years ago, but it is not the stack I am used to working with day to day. Even though Hugo does not require writing Go directly to build a blog, the way it organizes templates, partials, pipes, content, and configuration is very different from my usual workflow. That made the project useful as an exercise in adapting to a different tool and mindset.
+
+On top of Hugo, I used the **enervoid** theme, which already had a foundation close to what I wanted: a minimal look, monospace typography, a clean structure, and a terminal-like aesthetic. From there, the work was less about "creating a theme from scratch" and more about carefully adapting it: template overrides, layout tweaks, visual identity, multilingual support, and reading-experience details.
+
+The final structure has content split by language in `content/br` and `content/en`, translations in `i18n/br.toml` and `i18n/en.toml`, overrides in `layouts/`, custom assets, and a deployment workflow through **GitHub Actions** to **GitHub Pages**. The workflow checks out the repository with submodules, runs the Hugo build, and publishes the result to Pages with a dynamic `baseURL`. In practice, writing, committing, and pushing to `main` is enough to update the site.
+
+I also configured a few features I consider important for a technical blog: syntax highlighting with **Chroma** and the Monokai theme, **Mermaid** diagrams, **Open Graph** and **Twitter Card** metadata, sharing buttons, related posts based on tags, and a sepia light mode for people who do not enjoy reading on a dark background.
 
 But the real differentiator here was the creation process.
 
 ## The Model: GLM-5.1
 
-All the code, the structure, the template overrides, i18n support, color palette, light/dark toggle — everything was built in partnership with the **GLM-5.1** model, from Zhipu AI. This wasn't a "copy and paste from prompts" situation. It was an iterative, phased process where each step was planned, executed, and manually approved before moving to the next.
+All the code, the structure, the template overrides, i18n support, color palette, and light/dark toggle were initially built in partnership with the **GLM-5.1** model, from Zhipu AI.
 
-The workflow went like this: I described what I wanted, the model implemented it, I validated with `hugo server`, and decided whether to approve or request adjustments. Each phase produced a clean, semantic git commit. This allowed me to maintain full control over what was being done, even without manually writing every template line.
+This wasn't a "copy and paste from prompts" situation. It was an iterative process where each step was planned, executed, tested, and refined before moving to the next.
 
-Not everything worked perfectly on the first pass. When I published this post, the **Blog** button in the header did not open the correct listing: the content lived in `content/pt` and `content/en`, but Hugo had not been told that each folder was the content directory for a language. The result was duplicated URLs like `/pt/pt/blog/`, while the menu pointed to `/pt/blog/`.
+The workflow went like this: I described what I wanted, the model implemented it, I validated with `hugo server`, and decided whether to approve or request adjustments. This allowed me to maintain control over what was being done, even without manually writing every template line.
 
-I tried fixing it with GLM-5.1, but the solution was not good enough and I had to revert the commits. The switch was to make the multilingual setup more explicit, with one `contentDir` per language and `pageRef` in the menu, letting Hugo resolve the right route for each language.
+We started with the foundation: initializing the Hugo project inside the existing repository, adding the theme as a submodule, configuring the title, menu, avatar, social links, and `.gitignore`. Then came the multilingual layer, which required more attention: the theme had a few hardcoded strings, so we created i18n files and overrides for the header, home page, footer, article metadata, blog listing, and individual post page.
+
+Next came the visual identity. The header got the `{amaral stack}` signature, the favicon became an SVG with `{/}`, and the home page started highlighting the photo, name, tagline, and social links. The original palette with indigo tones was replaced by a combination of blue, emerald green, and a nearly black background. Later, we added the sepia light mode with persistence in `localStorage`, an anti-flash script in the `head`, and Mermaid re-rendering when the theme changes.
+
+The interactions with the AI felt a lot like an asynchronous pair programming loop. I defined the intent and constraints, it proposed a change, I tested it, pointed out what did not fit, and we refined from there.
+
+That refinement became an important part of the process. Many responses were not exactly the final result, but they served as a first version to adjust direction, naming, visual style, and architecture decisions. Some decisions were straightforward, like replacing the visual indigo accents with emerald. Others required judgment, like deciding how far to override the theme without turning the project into a fork that would be hard to update.
+
+Not everything worked perfectly on the first pass. When I published this post, the **Blog** button in the header did not open the correct listing. I tried fixing it with GLM-5.1, but the solution was not good enough. At the end of the process, there were still a few translation and routing bugs. Even after I explained the issue to GLM-5.1 and described the expected behavior, it did not close the fix in a satisfactory way. That was when I decided to run **GPT-5.5** specifically for those final adjustments and unblock the publication.
 
 ## What the Blog Supports
 
@@ -71,32 +90,21 @@ ORDER BY tags DESC;
 The blog also renders Mermaid diagrams directly in markdown. This is useful for visualizing architectures, flows, and relationships:
 
 ```mermaid
-graph LR
-    A[Markdown] -->|Hugo Build| B[Static HTML]
-    B -->|GitHub Actions| C[GitHub Pages]
-    C --> D[Global CDN]
-    D --> E[Reader]
+flowchart TD
+    A[Markdown post]
+    B[Hugo build]
+    C[Static HTML]
+    D[GitHub Pages]
+    E[Global CDN]
+    F[Reader]
+
+    A --> B --> C --> D --> E --> F
 ```
-
-```mermaid
-graph TD
-    subgraph "Blog Pipeline"
-        A[Write post in Markdown] --> B[hugo build --minify]
-        B --> C[Push to main]
-        C --> D[GitHub Actions]
-        D --> E[Automatic deploy]
-    end
-    F[GLM-5.1] -.->|creation assistance| A
-```
-
-## The Palette and Theme
-
-The visual identity was designed to be comfortable for reading code: dark background with accents in **blue** and **vibrant green**. The `<amaral stack/>` in the header is the visual signature — a blend of code and branding.
-
-For those who prefer reading with a light background, there's a toggle in the header that activates a **sepia** theme inspired by e-readers — no pure white that strains the eyes.
 
 ## What's Next
 
-The plan is to use this space to publish about software engineering, system architecture, AI experiences, and whatever else comes up along the way. If everything went right, you're reading this post and it's all working.
+The plan is to use this space to publish about software engineering, system architecture, AI experiences, and especially the studies connected to the local LLM project at work. I want to document both the technical decisions and the tests that succeed or fail.
+
+I also plan to keep working with **GLM-5.1** to better understand how it behaves. Despite the issues in the final translation and routing details, it was useful for structuring the project, accelerating experiments, and showing where human supervision needs to be more careful. If everything went right, you're reading this post and it's all working.
 
 Happy reading. o/
