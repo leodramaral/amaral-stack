@@ -1,0 +1,42 @@
+baseURL = 'https://example.org/'
+languageCode = 'pt-br'
+title = 'Amaral Stack'
+theme = 'enervoid'
+
+[menus]
+  [[menus.main]]
+    name = 'Blog'
+    pageRef = '/blog'
+    weight = 10
+
+[params]
+  avatar = "/perfil.jpg"
+
+  [[params.socials]]
+    link = "https://github.com/leandroamaral"
+    icon = "devicon-github-original"
+  [[params.socials]]
+    link = "https://linkedin.com/in/leandroamaral"
+    icon = "devicon-linkedin-plain"
+  [[params.socials]]
+    link = "https://x.com/leandroamaral"
+    icon = "devicon-twitter-original"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions.passthrough]
+      enable = true
+      [markup.goldmark.extensions.passthrough.delimiters]
+        block = [['$$','$$'], ['\\[','\\]']]
+        inline = [['$','$'], ['\\(','\\)']]
+
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+
+[markup.highlight]
+  noClasses = true
+  codeFences = true
+  guessSyntax = true
+  tabWidth = 4
+  style = "monokai"
