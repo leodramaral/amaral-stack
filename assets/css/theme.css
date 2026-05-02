@@ -2,6 +2,18 @@ html:not([data-theme="light"]) body {
   background-color: #111318 !important;
 }
 
+html:not([data-theme="light"]) .md-content a {
+  color: #34d399 !important;
+  text-decoration: underline;
+  text-decoration-color: rgba(52, 211, 153, 0.4);
+  text-underline-offset: 3px;
+}
+
+html:not([data-theme="light"]) .md-content a:hover {
+  color: #6ee7b7 !important;
+  text-decoration-color: #6ee7b7;
+}
+
 html:not([data-theme="light"]) .bg-black {
   background-color: #111318 !important;
 }
@@ -162,6 +174,14 @@ html:not([data-theme="light"]) .border-gray-700\/70 {
 
 [data-theme="light"] .md-content a {
   color: #3b82f6 !important;
+  text-decoration: underline;
+  text-decoration-color: rgba(59, 130, 246, 0.4);
+  text-underline-offset: 3px;
+}
+
+[data-theme="light"] .md-content a:hover {
+  color: #2563eb !important;
+  text-decoration-color: #2563eb;
 }
 
 [data-theme="light"] .md-content pre,

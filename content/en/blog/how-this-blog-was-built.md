@@ -6,9 +6,6 @@ translationKey: "how-this-blog-was-built"
 tags: ["hugo", "blog", "ai"]
 description: "The story behind Amaral Stack — how I used Hugo, the enervoid theme, and GLM-5.1 AI to build this blog from scratch."
 ---
-
-Anyone in software development knows that setting up a technical blog seems simple, but it's actually one of those projects you keep putting off. I had been trying to get this blog off the ground for a while, but the idea still needed to become execution.
-
 After working for a few months with **Codex**, I was looking for other models to test that were not **Claude Code**. One of the reasons is that I am using **OpenCode** and, for now, I want to keep working with it. That's when I decided to test **GLM-5.1** and use the blog as a practical project: small enough to move quickly, but complex enough to involve templates, i18n, visual theming, deployment, and technical content.
 
 The goal of the blog is not just to have a personal page online. I want to use this space to document studies, tests, and learnings from my new work project: building a system that will use a **local LLM** to enable conversations between users and general company data. Since this kind of solution involves architecture, security, UX, response evaluation, and integration with internal data, it made sense to have a place to record the process.
@@ -25,25 +22,34 @@ The final structure has content split by language in `content/br` and `content/e
 
 I also configured a few features I consider important for a technical blog: syntax highlighting with **Chroma** and the Monokai theme, **Mermaid** diagrams, **Open Graph** and **Twitter Card** metadata, sharing buttons, related posts based on tags, and a sepia light mode for people who do not enjoy reading on a dark background.
 
-But the real differentiator here was the creation process.
-
 ## The Model: GLM-5.1
 
-All the code, the structure, the template overrides, i18n support, color palette, and light/dark toggle were initially built in partnership with the **GLM-5.1** model, from Zhipu AI.
+The entire project was built in partnership with the **GLM-5.1** model from Z.AI. The dynamic felt like an asynchronous pair programming loop: I described the intent and constraints, the model proposed an implementation, I validated with `hugo server`, and decided whether to approve or request adjustments.
 
-This wasn't a "copy and paste from prompts" situation. It was an iterative process where each step was planned, executed, tested, and refined before moving to the next.
+Many responses were not the final result, but served as a first version to adjust direction, naming, and visual style. Some decisions were straightforward, like replacing all indigo occurrences with emerald. Others required judgment, like deciding how far to override the theme without turning the project into a fork that would be hard to update.
 
-The workflow went like this: I described what I wanted, the model implemented it, I validated with `hugo server`, and decided whether to approve or request adjustments. This allowed me to maintain control over what was being done, even without manually writing every template line.
+GLM-5.1 performed well in structuring and experimentation speed, but stumbled on the final details. Translation and routing bugs persisted even after several correction attempts. That was when I decided to run **GPT-5.5** specifically for those adjustments and unblock the publication.
 
-We started with the foundation: initializing the Hugo project inside the existing repository, adding the theme as a submodule, configuring the title, menu, avatar, social links, and `.gitignore`. Then came the multilingual layer, which required more attention: the theme had a few hardcoded strings, so we created i18n files and overrides for the header, home page, footer, article metadata, blog listing, and individual post page.
+## From Prompt to Plan
 
-Next came the visual identity. The header got the `{amaral stack}` signature, the favicon became an SVG with `{/}`, and the home page started highlighting the photo, name, tagline, and social links. The original palette with indigo tones was replaced by a combination of blue, emerald green, and a nearly black background. Later, we added the sepia light mode with persistence in `localStorage`, an anti-flash script in the `head`, and Mermaid re-rendering when the theme changes.
+It all started with an [initial prompt file](https://github.com/leodramaral/amaral-stack/blob/main/content/br/construcao/initial-prompt.md) where I described what I wanted: site type, functional and non-functional requirements, stacks, and the tone for the first post. From that prompt, GLM-5.1 generated a [development plan](https://github.com/leodramaral/amaral-stack/blob/main/content/br/construcao/development-plan.md) dividing the project into 9 phases — each with scope, deliverable, and commit message defined.
 
-The interactions with the AI felt a lot like an asynchronous pair programming loop. I defined the intent and constraints, it proposed a change, I tested it, pointed out what did not fit, and we refined from there.
+From start to finish, including planning, theme selection, reading the stack documentation, implementation, testing, and adjustments, the blog went from zero to first published post in about 3 hours of active work (not counting breaks). 17 commits in total.
 
-That refinement became an important part of the process. Many responses were not exactly the final result, but they served as a first version to adjust direction, naming, visual style, and architecture decisions. Some decisions were straightforward, like replacing the visual indigo accents with emerald. Others required judgment, like deciding how far to override the theme without turning the project into a fork that would be hard to update.
+## What Changed from the Original Plan
 
-Not everything worked perfectly on the first pass. When I published this post, the **Blog** button in the header did not open the correct listing. I tried fixing it with GLM-5.1, but the solution was not good enough. At the end of the process, there were still a few translation and routing bugs. Even after I explained the issue to GLM-5.1 and described the expected behavior, it did not close the fix in a satisfactory way. That was when I decided to run **GPT-5.5** specifically for those final adjustments and unblock the publication.
+The plan was ambitious for the available time, and like any plan, it served more as a compass than an exact map. The 9 planned phases turned into 17 commits — the 9 original ones plus 8 for adjustments, refactors, and fixes that came up along the way.
+
+Some things that changed:
+
+- **Branding**: the original plan asked for an `<A/>` logo, but during the process the identity evolved to `{amaral stack}` with an `{/}` favicon. The change was a design decision made during implementation.
+- **Language code**: the plan used `PT` as the language code, but it was changed to `BR` to be more precise about the locale.
+- **DBML**: the plan included DBML support for ER diagrams, but it ended up being left out of this initial version. ER diagrams can still be done via Mermaid's `erDiagram`.
+- **Submodule**: the enervoid theme started as a Git submodule, but was brought directly into the repository to simplify maintenance and deployment.
+- **dev-flow.txt**: the idea was to maintain a detailed development log throughout the process, but in practice I ended up prioritizing execution speed.
+- **GPT-5.5**: not in the original plan, but it was necessary to call another model to resolve translation and routing bugs that GLM-5.1 could not fix on its own.
+
+Despite the deviations, the plan served its purpose: it provided clear direction, allowed working in functional blocks, and kept the project focused.
 
 ## What the Blog Supports
 

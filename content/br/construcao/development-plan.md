@@ -1,3 +1,10 @@
+---
+build:
+  render: never
+  list: never
+  publishResources: false
+---
+
 # Plano de Desenvolvimento - Amaral Stack
 
 ## Observações sobre o tema enervoid

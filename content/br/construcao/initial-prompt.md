@@ -1,3 +1,10 @@
+---
+build:
+  render: never
+  list: never
+  publishResources: false
+---
+
 Amaral Stack
 
 O que é? 

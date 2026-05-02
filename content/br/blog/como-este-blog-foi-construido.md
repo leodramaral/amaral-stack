@@ -7,9 +7,7 @@ tags: ["hugo", "blog", "ia"]
 description: "A história por trás do Amaral Stack — como usei Hugo, o tema enervoid e a IA GLM-5.1 para montar este blog do zero."
 ---
 
-Quem acompanha a área de desenvolvimento sabe que montar um blog técnico parece simples, mas na verdade é um daqueles projetos que a gente sempre empurra com a barriga. Eu já vinha tentando tirar esse blog do papel fazia algum tempo, mas faltava transformar a ideia em execução.
-
-Após trabalhando por alguns meses com **Codex**, eu estava procurando outros modelos para testar que não fosse o **Claude Code**. Um dos motivos é que estou usando o **OpenCode** e, por enquanto, quero seguir trabalhando com ele. Foi aí que resolvi testar o **GLM-5.1** e usar o blog como projeto prático: pequeno o suficiente para evoluir rápido, mas com complexidade suficiente para envolver templates, i18n, tema visual, deploy e conteúdo técnico.
+Após trabalhar codando com o **Codex** por alguns meses, eu estava procurando outros modelos para testar que não fosse o **Claude Code**. Um dos motivos é que estou usando o **OpenCode** e, por enquanto, quero seguir trabalhando com ele. Foi aí que resolvi testar o **GLM-5.1** e usar o blog como projeto prático: pequeno o suficiente para evoluir rápido, mas com complexidade suficiente para envolver templates, i18n, tema visual, deploy e conteúdo técnico.
 
 O objetivo do blog também não é só ter uma página pessoal no ar. Quero usar este espaço para documentar estudos, testes e aprendizados do meu novo projeto no trabalho: a construção de um sistema que utilizará uma **LLM local** para permitir conversas entre usuários e dados gerais da empresa. Como esse tipo de solução passa por arquitetura, segurança, UX, avaliação de respostas e integração com dados internos, fazia sentido ter um lugar para registrar o processo.
 
@@ -25,25 +23,34 @@ A estrutura final ficou com conteúdo separado por idioma em `content/br` e `con
 
 Também configurei alguns recursos que considero importantes para um blog técnico: syntax highlighting com **Chroma** e tema Monokai, diagramas **Mermaid**, metadados **Open Graph** e **Twitter Card**, botões de compartilhamento, posts relacionados por tags e um modo claro em tom sepia para quem não gosta de ler em fundo escuro.
 
-Mas o diferencial aqui foi o processo de criação.
-
 ## O modelo: GLM-5.1
 
-Todo o código, a estrutura, os overrides de template, o suporte a i18n, a paleta de cores e o toggle claro/escuro foram construídos inicialmente em parceria com o modelo **GLM-5.1**, da Zhipu AI.
+Todo o projeto foi construído em parceria com o modelo **GLM-5.1**, da Z.AI. A dinâmica funcionou como um ciclo de pair programming assíncrono: eu descrevia a intenção e as restrições, o modelo propunha uma implementação, eu validava com `hugo server` e decidia se aprovava ou pedia ajustes.
 
-Não foi um "copiar e colar" de prompts. Foi um processo iterativo, onde cada etapa era planejada, executada, testada e refinada antes de seguir para a próxima.
+Muitas respostas não eram o resultado final, mas serviam como primeira versão para ajustar direção, nomenclatura e estilo visual. Algumas decisões foram objetivas, como trocar todas as ocorrências de indigo por emerald. Outras exigiram julgamento, como decidir até onde sobrescrever o tema sem transformar o projeto em uma cópia difícil de atualizar.
 
-O fluxo funcionava assim: eu descrevia o que queria, o modelo implementava, eu validava com `hugo server` e decidia se aprovava ou pedia ajustes. Isso me permitiu manter controle sobre o que estava sendo feito, mesmo sem escrever manualmente cada linha de template.
+O GLM-5.1 se saiu bem na estruturação e na velocidade de experimentação, mas tropeçou nos detalhes finais. Bugs de tradução e roteamento persistiram mesmo após várias tentativas de correção. Foi aí que resolvi rodar o **GPT-5.5** para atacar especificamente esses ajustes e destravar a publicação.
 
-Começamos pela fundação: inicializar o projeto Hugo no repositório existente, adicionar o tema como submodule, configurar título, menu, avatar, links sociais e `.gitignore`. Depois veio a parte multilíngue, que exigiu mais atenção: o tema tinha algumas strings hardcoded, então criamos arquivos i18n e overrides para header, home, footer, metadados de artigo, listagem do blog e página individual de post.
+## Do prompt ao plano
 
-Na sequência, trabalhamos a identidade visual. O header ganhou o `{amaral stack}`, o favicon virou um SVG com `{/}`, a home passou a destacar a foto, nome, tagline e redes sociais. A paleta original com tons de indigo foi substituída por uma combinação de azul, verde emerald e fundo quase preto. Mais tarde, adicionamos o modo claro sepia com persistência em `localStorage`, script anti-flash no `head` e re-renderização do Mermaid quando o tema muda.
+Tudo começou com um [arquivo de prompt inicial](https://github.com/leodramaral/amaral-stack/blob/main/content/br/construcao/initial-prompt.md) onde descrevi o que queria: tipo de site, requisitos funcionais e não funcionais, stacks e o tom do primeiro post. A partir desse prompt, o GLM-5.1 gerou o [plano de desenvolvimento](https://github.com/leodramaral/amaral-stack/blob/main/content/br/construcao/development-plan.md), dividindo o projeto em 9 fases — cada uma com escopo, entregável e mensagem de commit definidos.
 
-As interações com a IA foram muito parecidas com um ciclo de pair programming assíncrono. Eu definia a intenção e as restrições, ela propunha uma alteração, eu testava, apontava o que não encaixava e seguíamos refinando.
+Do início ao fim, entre planejamento, escolha do tema, leitura da documentação da stack, implementação, testes e ajustes, o blog saiu do zero ao primeiro post publicado em cerca de 3 horas de trabalho efetivo (não contando os intervalos). Foram 17 commits no total.
 
-Esse refinamento acabou sendo uma parte importante do processo. Muitas respostas não eram exatamente o resultado final, mas serviam como uma primeira versão para ajustar direção, nomenclatura, estilo visual e decisões de arquitetura. Algumas decisões foram objetivas, como trocar todas as ocorrências visuais de indigo por emerald. Outras exigiram julgamento, como decidir até onde sobrescrever o tema sem transformar o projeto em uma cópia difícil de atualizar.
+## O que mudou do plano original
 
-Nem tudo saiu perfeito na primeira passada. Quando publiquei este post, o botão **Blog** no header não levava para a listagem correta. Tentei uma correção com o GLM-5.1, mas a solução não ficou boa. No final do processo, ainda ficaram alguns bugs de tradução e roteamento. Mesmo orientando o GLM-5.1 sobre o problema e explicando o comportamento esperado, ele não conseguiu fechar a correção de forma satisfatória. Foi nesse ponto que resolvi rodar o **GPT-5.5** para atacar especificamente esses ajustes finais e destravar a publicação.
+O plano era ambicioso para o tempo disponível e, como todo plano, serviu mais como bússola do que como mapa exato. As 9 fases previstas viraram 17 commits — os 9 originais mais 8 de ajustes, refatorações e correções que surgiram ao longo do caminho.
+
+Alguns pontos que mudaram:
+
+- **Branding**: o plano original pedia a logo `<A/>`, mas durante o processo a identidade evoluiu para `{amaral stack}` com um favicon `{/}`. A mudança foi uma decisão de design tomada durante a implementação.
+- **Idioma**: o plano usava `PT` como código de idioma, mas foi alterado para `BR` para ser mais preciso quanto à localização.
+- **DBML**: o plano previa suporte a DBML para diagramas ER, mas acabou ficando de fora dessa versão inicial. Diagramas ER ainda podem ser feitos via `erDiagram` do Mermaid.
+- **Submodule**: o tema enervoid começou como submodule do Git, mas foi trazido diretamente para dentro do repositório para simplificar manutenção e deploy.
+- **dev-flow.txt**: a ideia era manter um log detalhado de desenvolvimento ao longo do processo, mas na prática acabei priorizando a velocidade de execução.
+- **GPT-5.5**: não estava no plano original, mas foi necessário chamar outro modelo para resolver bugs de tradução e roteamento que o GLM-5.1 não conseguiu fechar sozinho.
+
+Apesar dos desvios, o plano cumpriu seu papel: deu direção clara, permitiu trabalhar em blocos funcionais e manteve o projeto focado.
 
 ## O que o blog suporta
 
