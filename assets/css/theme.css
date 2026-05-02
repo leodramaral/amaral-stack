@@ -1,3 +1,39 @@
+html:not([data-theme="light"]) body {
+  background-color: #111318 !important;
+}
+
+html:not([data-theme="light"]) .bg-black {
+  background-color: #111318 !important;
+}
+
+html:not([data-theme="light"]) .bg-\[\#070709\],
+html:not([data-theme="light"]) .bg-\[\#070709\]\/80,
+html:not([data-theme="light"]) .bg-\[\#070709\]\/95 {
+  background-color: #181b20 !important;
+}
+
+html:not([data-theme="light"]) nav.bg-\[\#070709\]\/95,
+html:not([data-theme="light"]) footer .bg-\[\#070709\] {
+  background-color: #15181d !important;
+}
+
+html:not([data-theme="light"]) .bg-black\/30,
+html:not([data-theme="light"]) .bg-black\/40 {
+  background-color: #20242b !important;
+}
+
+html:not([data-theme="light"]) .border-gray-800,
+html:not([data-theme="light"]) .border-gray-800\/70,
+html:not([data-theme="light"]) .border-gray-800\/80,
+html:not([data-theme="light"]) .divide-gray-800\/80 > :not(:last-child) {
+  border-color: #2a3038 !important;
+}
+
+html:not([data-theme="light"]) .border-gray-700,
+html:not([data-theme="light"]) .border-gray-700\/70 {
+  border-color: #343b45 !important;
+}
+
 [data-theme="light"] body {
   background-color: #f5f0e1;
   color: #3d3529;
