@@ -24,3 +24,15 @@ other = "Made with"
 
 [open_menu]
 other = "Open menu"
+
+[share]
+other = "Share"
+
+[copy_link]
+other = "Copy link"
+
+[copied]
+other = "Copied!"
+
+[related]
+other = "Related posts"

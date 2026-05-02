@@ -1,0 +1,21 @@
+{{- $url := .Permalink }}
+{{- $title := .Title }}
+{{- $encodedURL := printf "%s" (urls.Parse $url).String }}
+{{- $encodedTitle := urlquery $title }}
+<div class="mt-8 pt-6 border-t border-gray-800/70">
+  <p class="text-sm uppercase tracking-widest text-gray-500 mb-4">{{ T "share" }}</p>
+  <div class="flex items-center gap-3">
+    <a href="https://x.com/intent/tweet?url={{ $encodedURL }}&text={{ $encodedTitle }}" target="_blank" rel="noopener"
+      class="inline-flex items-center gap-2 px-4 py-2 rounded-sm border border-gray-700/70 bg-black/30 text-gray-300 text-sm hover:text-white hover:border-emerald-400/40 transition-colors">
+      <i class="devicon-twitter-original"></i> X
+    </a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $encodedURL }}" target="_blank" rel="noopener"
+      class="inline-flex items-center gap-2 px-4 py-2 rounded-sm border border-gray-700/70 bg-black/30 text-gray-300 text-sm hover:text-white hover:border-emerald-400/40 transition-colors">
+      <i class="devicon-linkedin-plain"></i> LinkedIn
+    </a>
+    <button onclick="navigator.clipboard.writeText(window.location.href);this.dataset.copied='true';this.querySelector('span').textContent='{{ T "copied" }}';setTimeout(()=>{this.dataset.copied='';this.querySelector('span').textContent='{{ T "copy_link" }}'},2000)"
+      class="inline-flex items-center gap-2 px-4 py-2 rounded-sm border border-gray-700/70 bg-black/30 text-gray-300 text-sm hover:text-white hover:border-emerald-400/40 transition-colors cursor-pointer">
+      <i class="fa-solid fa-link"></i> <span>{{ T "copy_link" }}</span>
+    </button>
+  </div>
+</div>

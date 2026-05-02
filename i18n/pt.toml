@@ -24,3 +24,15 @@ other = "Feito com"
 
 [open_menu]
 other = "Abrir menu"
+
+[share]
+other = "Compartilhar"
+
+[copy_link]
+other = "Copiar link"
+
+[copied]
+other = "Copiado!"
+
+[related]
+other = "Posts relacionados"

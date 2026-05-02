@@ -35,6 +35,9 @@
         {{ .Content }}
       </div>
     </div>
+
+    {{ partial "article/share.html" . }}
+    {{ partial "article/related.html" . }}
   </article>
 </div>
 
@@ -68,7 +71,7 @@
   .toc a:hover {
     color: #fff;
     text-decoration: underline;
-    text-decoration-color: rgba(99, 102, 241, 0.85);
+    text-decoration-color: rgba(5, 150, 105, 0.85);
     text-underline-offset: 3px;
   }
 
@@ -87,7 +90,7 @@
     position: absolute;
     left: 0.35rem;
     top: 0.2rem;
-    color: rgba(99, 102, 241, 0.75);
+    color: rgba(5, 150, 105, 0.75);
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
