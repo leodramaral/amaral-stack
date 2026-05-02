@@ -1,34 +1,31 @@
 baseURL = '/'
-defaultContentLanguage = 'pt'
+defaultContentLanguage = 'br'
 defaultContentLanguageInSubdir = true
 theme = 'enervoid'
 
 [languages]
-  [languages.pt]
-    contentDir = 'content/pt'
+  [languages.br]
+    contentDir = 'content/br'
     languageCode = 'pt-br'
     languageName = 'BR'
     title = 'Amaral Stack'
     weight = 1
 
-    [languages.pt.menus]
-      [[languages.pt.menus.main]]
+    [languages.br.menus]
+      [[languages.br.menus.main]]
         name = 'Blog'
         pageRef = '/blog'
         weight = 10
 
-    [languages.pt.params]
+    [languages.br.params]
       avatar = "/perfil.jpg"
 
-      [[languages.pt.params.socials]]
-        link = "https://github.com/leandroamaral"
+      [[languages.br.params.socials]]
+        link = "https://github.com/leodramaral"
         icon = "devicon-github-original"
-      [[languages.pt.params.socials]]
-        link = "https://linkedin.com/in/leandroamaral"
+      [[languages.br.params.socials]]
+        link = "https://www.linkedin.com/in/leodramaral/"
         icon = "devicon-linkedin-plain"
-      [[languages.pt.params.socials]]
-        link = "https://x.com/leandroamaral"
-        icon = "devicon-twitter-original"
 
   [languages.en]
     contentDir = 'content/en'

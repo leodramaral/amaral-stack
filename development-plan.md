@@ -18,14 +18,14 @@ O tema já oferece de fábrica: mermaid, syntax highlighting (monokai), tags, la
 - **Entregável**: site serve com `hugo server`, mostra o tema padrão
 - **Commit**: `chore: inicialização do projeto Hugo com tema enervoid`
 
-## Fase 2 - Estrutura i18n (PT/EN)
+## Fase 2 - Estrutura i18n (BR/EN)
 
-- Configurar `defaultContentLanguage = "pt"` + `en` no `hugo.toml`
-- Criar arquivos de tradução `i18n/pt.toml` e `i18n/en.toml`
-- Reestruturar `content/` para `content/pt/` e `content/en/`
+- Configurar `defaultContentLanguage = "br"` + `en` no `hugo.toml`
+- Criar arquivos de tradução `i18n/br.toml` e `i18n/en.toml`
+- Reestruturar `content/` para `content/br/` e `content/en/`
 - Adicionar language switcher no header (override do partial)
 - **Entregável**: site funcional nos dois idiomas com switcher
-- **Commit**: `feat: suporte a multilinguagem PT/EN`
+- **Commit**: `feat: suporte a multilinguagem BR/EN`
 
 ## Fase 3 - Branding (Logo, Favicon, Home, Redes Sociais)
 
