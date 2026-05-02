@@ -14,7 +14,7 @@
   <div class="mt-3 flex flex-wrap gap-2">
     {{- range . -}}
     <a href="{{ (printf " tags/%s" (. | urlize)) | relURL }}"
-      class="px-2 py-0.5 text-xs sm:text-sm rounded-sm border border-gray-700/70 text-gray-300 bg-black/30 hover:text-white hover:border-indigo-400/40 transition-colors">
+      class="px-2 py-0.5 text-xs sm:text-sm rounded-sm border border-gray-700/70 text-gray-300 bg-black/30 hover:text-white hover:border-emerald-400/40 transition-colors">
       #{{ . }}
     </a>
     {{- end -}}
