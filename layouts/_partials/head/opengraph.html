@@ -12,7 +12,11 @@
 {{- end }}
 
 {{- with .Params.image }}
-{{- $image = . | absURL }}
+  {{- with $.Resources.Get . }}
+    {{- $image = .Permalink }}
+  {{- else }}
+    {{- $image = . | absURL }}
+  {{- end }}
 {{- else }}
 {{- with site.Params.og_image }}
 {{- $image = . | absURL }}

@@ -1,13 +1,16 @@
 ---
-title: "Como Este Blog Foi Construído"
-date: 2025-05-02T10:00:00-03:00
+title: "Construindo um blog com Hugo e GLM-5.1 (ou quase)"
+date: 2025-05-03T10:00:00-03:00
 draft: false
-translationKey: "how-this-blog-was-built"
-tags: ["hugo", "blog", "ia"]
-description: "A história por trás do Amaral Stack — como usei Hugo, o tema enervoid e a IA GLM-5.1 para montar este blog do zero."
+translationKey: "building-a-blog-with-hugo"
+tags: ["hugo", "blog", "ia", "glm5.1", "opencode", "gpt5.5"]
+description: "Como construí o Amaral Stack do zero usando Hugo, o tema enervoid, o modelo GLM-5.1 via OpenCode e um deploy automatizado no GitHub Pages"
+image: "blog-stack.png"
 ---
 
-Após trabalhar codando com o **Codex** por alguns meses, eu estava procurando outros modelos para testar que não fosse o **Claude Code**. Um dos motivos é que estou usando o **OpenCode** e, por enquanto, quero seguir trabalhando com ele. Foi aí que resolvi testar o **GLM-5.1** e usar o blog como projeto prático: pequeno o suficiente para evoluir rápido, mas com complexidade suficiente para envolver templates, i18n, tema visual, deploy e conteúdo técnico.
+{{< figure src="blog-stack.png" alt="Stack do blog: Hugo, terminal OpenCode com GLM-5.1 e deploy no GitHub Pages" >}}
+
+Após trabalhar com o **Codex** por alguns meses, eu estava procurando outros modelos para testar. Foi aí que resolvi experimentar o **GLM-5.1**, da [Z.AI](https://z.ai/blog/glm-5.1), e usar o blog como projeto prático: pequeno o suficiente para evoluir rápido, mas com complexidade suficiente para envolver templates, i18n, tema visual, deploy e conteúdo técnico. Para interagir com o modelo, uso o **OpenCode**, um cliente de terminal open source para coding com LLMs.
 
 O objetivo do blog também não é só ter uma página pessoal no ar. Quero usar este espaço para documentar estudos, testes e aprendizados do meu novo projeto no trabalho: a construção de um sistema que utilizará uma **LLM local** para permitir conversas entre usuários e dados gerais da empresa. Como esse tipo de solução passa por arquitetura, segurança, UX, avaliação de respostas e integração com dados internos, fazia sentido ter um lugar para registrar o processo.
 
@@ -25,7 +28,7 @@ Também configurei alguns recursos que considero importantes para um blog técni
 
 ## O modelo: GLM-5.1
 
-Todo o projeto foi construído em parceria com o modelo **GLM-5.1**, da Z.AI. A dinâmica funcionou como um ciclo de pair programming assíncrono: eu descrevia a intenção e as restrições, o modelo propunha uma implementação, eu validava com `hugo server` e decidia se aprovava ou pedia ajustes.
+O **GLM-5.1** é um modelo de linguagem focado em código, desenvolvido pela [Z.AI](https://z.ai/blog/glm-5.1), uma empresa chinesa de inteligência artificial. Para utilizá-lo como assistente de programação, assinei o **GLM Coding Plan Lite**, plano que dá acesso ao modelo otimizado para tarefas de desenvolvimento. Todo o projeto foi construído em parceria com ele. A dinâmica funcionou como um ciclo de pair programming assíncrono: eu descrevia a intenção e as restrições, o modelo propunha uma implementação, eu validava com `hugo server` e decidia se aprovava ou pedia ajustes.
 
 Muitas respostas não eram o resultado final, mas serviam como primeira versão para ajustar direção, nomenclatura e estilo visual. Algumas decisões foram objetivas, como trocar todas as ocorrências de indigo por emerald. Outras exigiram julgamento, como decidir até onde sobrescrever o tema sem transformar o projeto em uma cópia difícil de atualizar.
 
@@ -35,7 +38,7 @@ O GLM-5.1 se saiu bem na estruturação e na velocidade de experimentação, mas
 
 Tudo começou com um [arquivo de prompt inicial](https://github.com/leodramaral/amaral-stack/blob/main/content/br/construcao/initial-prompt.md) onde descrevi o que queria: tipo de site, requisitos funcionais e não funcionais, stacks e o tom do primeiro post. A partir desse prompt, o GLM-5.1 gerou o [plano de desenvolvimento](https://github.com/leodramaral/amaral-stack/blob/main/content/br/construcao/development-plan.md), dividindo o projeto em 9 fases — cada uma com escopo, entregável e mensagem de commit definidos.
 
-Do início ao fim, entre planejamento, escolha do tema, leitura da documentação da stack, implementação, testes e ajustes, o blog saiu do zero ao primeiro post publicado em cerca de 3 horas de trabalho efetivo (não contando os intervalos). Foram 17 commits no total.
+Do início ao fim, entre planejamento, escolha do tema, leitura da documentação da stack, implementação, testes e ajustes, o blog saiu do zero ao primeiro post publicado. Foram 17 commits no total.
 
 ## O que mudou do plano original
 
@@ -113,5 +116,3 @@ flowchart TD
 A ideia é usar este espaço para publicar sobre engenharia de software, arquitetura de sistemas, experiências com IA e, principalmente, sobre os estudos ligados ao projeto com LLM local no trabalho. Quero registrar tanto as decisões técnicas quanto os testes que derem certo ou errado.
 
 Também pretendo seguir trabalhando com o **GLM-5.1** para entender melhor seu funcionamento. Apesar dos tropeços nos detalhes finais de tradução, ele foi útil para estruturar o projeto, acelerar experimentos e revelar onde a supervisão humana precisa ser mais cuidadosa. Se deu certo, você está lendo este post e tudo está funcionando.
-
-Boa leitura. o/
