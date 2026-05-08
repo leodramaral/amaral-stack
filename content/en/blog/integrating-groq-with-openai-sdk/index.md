@@ -76,15 +76,13 @@ async function main() {
 }
 
 main();
-
 ```
 
 ### Using Function Tools
 This is where Function Calling comes in: you describe a real function from your system, and the model decides when to call it. This improves direction because the model starts seeking objective data (e.g., order status) instead of trying to "invent" answers.
 
-```javascript
+```typescript
 // Reuses the OpenAI client from the previous example.
-
 const MODEL = 'meta-llama/llama-4-scout-17b-16e-instruct';
 
 async function getOrderStatus({ orderId }: { orderId: string }): Promise<{ orderId: string, status: string, eta: string }> {
@@ -157,7 +155,6 @@ async function runAgent() {
 }
 
 runAgent();
-
 ```
 
 ### Conclusion: A Great Choice for Studies

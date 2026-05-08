@@ -69,7 +69,6 @@ theme = 'enervoid'
   noClasses = true
   codeFences = true
   guessSyntax = true
-  lineNos = true
   lineNumbersInTable = true
   tabWidth = 4
   style = "monokai"
