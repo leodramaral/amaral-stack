@@ -1,12 +1,12 @@
 ---
-title: "Integrando Groq ao OpenAI SDK"
+title: "Usando Groq com o SDK da OpenAI"
 date: '2026-05-06T21:20:33-04:00'
 author: "Leandro Amaral"
 tags: ["Groq", "OpenAI", "NodeJS", "Backend", "IA"]
 description: "Como resolvi gargalos de hardware usando a compatibilidade do Groq com a OpenAI SDK para estudar LLMs."
 ---
 
-# Integrando Groq ao OpenAI SDK
+# Usando Groq com o SDK da OpenAI
 
 Recentemente estive trabalhando com o SDK da OpenAI para implementar um chatbot rodando uma modelo LLM local, o problema é meu computador de desenvolvimento não tem potência para esse fim, foi quando conheci o serviço [**Groq**](https://groq.com/).
 
