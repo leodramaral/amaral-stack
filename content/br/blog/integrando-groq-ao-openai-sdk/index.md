@@ -4,7 +4,6 @@ date: '2026-05-06T21:20:33-04:00'
 author: "Leandro Amaral"
 tags: ["Groq", "OpenAI", "NodeJS", "Backend", "IA"]
 description: "Como resolvi gargalos de hardware usando a compatibilidade do Groq com a OpenAI SDK para estudar LLMs."
-draft: true
 ---
 
 # Integrando Groq ao OpenAI SDK
@@ -20,6 +19,24 @@ O que resolveu meu problema foi descobrir que, além de possuir sua própria SDK
 ---
 
 ### Cadastro e API Key
+Criar uma chave para usar um modelo é gratuito
+
+- Acesse o [site do Groq](https://console.groq.com/home) e faça seu cadastro;
+- OBS: até a publicação desse post, existe um bug que não permite criação de conta Outlook ou Hotmail;
+- Será criado uma 'Organização' e 'Projeto' padrão;
+
+{{< figure src="groq-api-keys-page.png" alt="Página do Groq onde são listadas as api keys" >}}
+
+- Crie a sua api key, acionando o botão dedicado;
+
+### Habilitando um modelo
+Após a criação da chave, você deve habilitar um modelo no painel para poder utilizá-lo
+
+- Acesse a página [para habilitar um ou mais modelos para uso](https://console.groq.com/settings/project/limits);
+- Na seção "Allowed Models" selecione "Edit" onde você poderá escolher um ou mais modelos para uso;
+
+
+{{< figure src="groq-allowed-models.png" alt="Página do Groq onde os modelos são habilitados" >}}
 
 ---
 
@@ -27,11 +44,12 @@ O que resolveu meu problema foi descobrir que, além de possuir sua própria SDK
 
 Para quem já utiliza a biblioteca da OpenAI em JavaScript/TypeScript, a transição é transparente. O segredo está em apontar o `baseURL` para o endpoint de compatibilidade do Groq.
 
-```javascript
+```typescript
 import OpenAI from 'openai';
 
+const MODEL = 'meta-llama/llama-4-scout-17b-16e-instruct';
 const openai = new OpenAI({
-  apiKey: 'SUA_CHAVE_GROQ',
+  apiKey: 'YOUR_GROQ_API',
   baseURL: 'https://api.groq.com/openai/v1', // Integração via compatibilidade
 });
 
@@ -44,17 +62,20 @@ async function main() {
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userMessage }
     ],
-    model: 'llama3-8b-8192',
+    model: MODEL,
   });
 
   console.log(response.choices[0].message.content);
   /**
    * SAÍDA ESPERADA:
-   * "Sinto pelo atraso. Vou consultar o status do pedido 550e8400 agora."
+   * "Claro, posso verificar o status do seu pedido! Por favor, aguarde um minuto enquanto eu busco a informação em nossos sistemas.
+      Sim, consegui visualizar o seu pedido. Posso te informar que o status atualemente é "Em processamento" e que a previsão de entrega é 2 dias adicionais.
+      Quer que eu te envie um email de atualização ou que eu te chame para discutir outras opções? Obrigado por sua paciência!"
    */
 }
 
 main();
+
 ```
 
 ### Usando Function Tools
@@ -63,19 +84,21 @@ Aqui entra o Function Calling: você descreve uma função real do seu sistema e
 ```javascript
 // Reaproveita o cliente OpenAI do exemplo anterior.
 
-async function getOrderStatus({ orderId }) {
-  // Simula consulta real no seu banco/ERP.
-  return { orderId, status: 'em separacao', eta: '2 dias' };
+const MODEL = 'meta-llama/llama-4-scout-17b-16e-instruct';
+
+async function getOrderStatus({ orderId }: { orderId: string }): Promise<{ orderId: string, status: string, eta: string }> {
+        // Simula consulta real no seu banco.
+        return { orderId, status: 'em separacao', eta: '2 dias' };
 }
 
 async function runAgent() {
   const userMessage = 'Meu pedido 550e8400 está atrasado. Consegue ver o status?';
 
-  const messages = [
+  const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
     { role: 'user', content: userMessage }
   ];
 
-  const tools = [{
+  const tools: OpenAI.Chat.Completions.ChatCompletionTool[] = [{
     type: 'function',
     function: {
       name: 'get_order_status',
@@ -91,12 +114,14 @@ async function runAgent() {
   }];
 
   const response = await openai.chat.completions.create({
-    model: 'llama3-70b-8192',
+    model: MODEL,
     messages,
     tools,
   });
 
-  const toolCall = response.choices[0].message.tool_calls[0];
+  const { message } = response.choices[0];
+
+  const toolCall = message.tool_calls[0];
   console.log(toolCall.function);
   /**
    * SAÍDA ESPERADA:
@@ -107,14 +132,17 @@ async function runAgent() {
   const toolResult = await getOrderStatus(toolArgs);
 
   const finalResponse = await openai.chat.completions.create({
-    model: 'llama3-70b-8192',
+    model: MODEL,
     messages: [
       ...messages,
-      response.choices[0].message,
+      {
+        role: 'assistant',
+        tool_calls: message.tool_calls,
+      },
       {
         role: 'tool',
         tool_call_id: toolCall.id,
-        name: 'get_order_status',
+        name: toolCall.function.name,
         content: JSON.stringify(toolResult),
       },
     ],
@@ -128,6 +156,7 @@ async function runAgent() {
 }
 
 runAgent();
+
 ```
 
 ### Conclusão: Uma Ótima Escolha para Estudos
@@ -135,10 +164,10 @@ O Groq me permitiu estudar conceitos como Function Calling (Tools) e Streamings 
 
 Pontos de Atenção (Limitações):
 
-- IDs de Modelos: O Groq possui uma biblioteca de modelos que devem ser utilizados. Confira [aqui](https://console.groq.com/docs/models) a lista.
+- IDs de Modelos: O Groq possui uma [biblioteca](https://console.groq.com/docs/models) de modelos que devem ser utilizados.
 
-- Rate Limits: O plano gratuito é excelente, mas possui limites de requisições por minuto (RPM) que devem ser monitorados no seu dashboard. Consulte também a [tabela](https://console.groq.com/docs/rate-limits) de rate limits
+- Rate Limits: O plano gratuito é excelente, mas possui limites de requisições por minuto (RPM) que devem ser monitorados no seu dashboard. Consulte a [tabela](https://console.groq.com/docs/rate-limits) de rate limits.
 
-- Recursos Exclusivos: Funcionalidades específicas da OpenAI, como geração de imagens com DALL-E ou Fine-tuning nativo, não são acessíveis por este endpoint. Mais detalhes sobre a compatabilidade [aqui](https://console.groq.com/docs/openai)
+- Recursos Exclusivos: algumas funcionalidades da OpenAI [não são suportadas](https://console.groq.com/docs/openai#currently-unsupported-openai-features).
 
 Para quem está começando no mundo das LLMs e não quer (ou não pode) investir em hardware pesado agora, o Groq é, sem dúvida, o melhor ponto de partida para transformar ideias em código funcional.
