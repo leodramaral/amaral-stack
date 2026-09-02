@@ -5,6 +5,8 @@
    zero room to stick. <header>'s own parent is <body>, which spans the full page height. */ -}}
   <nav class="w-full border-b border-gray-800 bg-[#070709]/95 backdrop-blur-sm text-gray-100">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      {{- /* h-16 (4rem): blog/list.html's "pt-24" and blog/single.html's "sticky top-24" both
+         hard-code clearance for this nav height. Update those two if this changes. */ -}}
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center gap-3">
           <a href='{{ .Site.BaseURL | relLangURL }}'

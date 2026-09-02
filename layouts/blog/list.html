@@ -17,14 +17,14 @@
         class="absolute inset-0 z-0 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-400"
         aria-label="{{ .Title }}"></a>
       <div class="relative z-[1] grid grid-cols-12 gap-4 items-start pointer-events-none">
-        <div class="col-span-12 md:col-span-8">
+        <div class="col-span-12 md:col-span-9">
           <div class="text-xs sm:text-sm text-gray-500 font-mono">
             <span>{{ .Date.Format "Jan 02, 2006" }}</span>
             <span class="mx-2 text-gray-700">&bull;</span>
             <span>{{ .Date.Format "15:04" }}</span>
           </div>
 
-          <div class="mt-1 text-lg sm:text-xl text-gray-100">
+          <div class="mt-1 text-lg sm:text-xl text-gray-100 [overflow-wrap:anywhere]">
             <span class="relative inline-block">
               {{ .Title }}
               <span
@@ -33,7 +33,7 @@
           </div>
         </div>
 
-        <div class="col-span-12 md:col-span-4 flex md:justify-end flex-wrap gap-2 pointer-events-auto">
+        <div class="col-span-12 md:col-span-3 flex flex-wrap gap-2 pointer-events-auto">
           {{- with .GetTerms "tags" -}}
           {{- range . -}}
           <a href="{{ .RelPermalink }}" class="relative z-10 px-2 py-0.5 text-xs sm:text-sm rounded-sm border border-gray-700/70 text-gray-300 bg-black/30 transition-colors duration-200 hover:border-emerald-500/70 hover:text-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-400">
