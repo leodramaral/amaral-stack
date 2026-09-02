@@ -1,5 +1,8 @@
 {{- /* header.html - top-level navbar for site */ -}}
-<div class="sticky absolute top-0 z-50">
+{{- /* Positioning (sticky top-0 z-50) lives on the <header> element in baseof.html, not here:
+   position: sticky is bounded by the element's own containing block, and this partial's root
+   div is wrapped tightly (same height) by <header> in the theme's baseof.html, leaving sticky
+   zero room to stick. <header>'s own parent is <body>, which spans the full page height. */ -}}
   <nav class="w-full border-b border-gray-800 bg-[#070709]/95 backdrop-blur-sm text-gray-100">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-16">
@@ -147,4 +150,3 @@
       });
     })();
   </script>
-</div>
