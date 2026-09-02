@@ -36,3 +36,9 @@ other = "Copiado!"
 
 [related]
 other = "Posts relacionados"
+
+[latest_posts]
+other = "Últimos posts"
+
+[view_all_posts]
+other = "Ver todos os posts"
