@@ -19,6 +19,7 @@ theme = 'enervoid'
 
     [languages.br.params]
       avatar = "/perfil.jpg"
+      homepage_description = "Blog pessoal e mini-currículo de Leandro Amaral — anotações sobre backend, IA e as ferramentas que uso no dia a dia."
 
       [[languages.br.params.socials]]
         link = "https://github.com/leodramaral"
@@ -42,6 +43,7 @@ theme = 'enervoid'
 
     [languages.en.params]
       avatar = "/perfil.jpg"
+      homepage_description = "Personal blog and mini-CV for Leandro Amaral — notes on backend, AI, and the tools I use day to day."
 
       [[languages.en.params.socials]]
         link = "https://github.com/leandroamaral"

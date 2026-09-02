@@ -42,3 +42,9 @@ other = "Últimos posts"
 
 [view_all_posts]
 other = "Ver todos os posts"
+
+[homepage]
+other = "Página inicial"
+
+[toggle_theme]
+other = "Alternar tema"

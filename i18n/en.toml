@@ -42,3 +42,9 @@ other = "Latest posts"
 
 [view_all_posts]
 other = "View all posts"
+
+[homepage]
+other = "Homepage"
+
+[toggle_theme]
+other = "Toggle theme"

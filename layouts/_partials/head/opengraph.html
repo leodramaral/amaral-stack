@@ -8,6 +8,10 @@
 {{- else }}
 {{- with .Summary }}
 {{- $description = . | plainify | truncate 160 }}
+{{- else }}
+{{- if .IsHome }}
+{{- $description = site.Params.homepage_description }}
+{{- end }}
 {{- end }}
 {{- end }}
 
