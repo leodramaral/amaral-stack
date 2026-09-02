@@ -12,8 +12,9 @@
   <div class="border border-gray-800/70 rounded-sm bg-[#070709] divide-y divide-gray-800/80 overflow-hidden">
     {{- if gt (len $pages) 0 -}}
     {{- range $pages -}}
-    <a href="{{ .RelPermalink }}" class="group block px-4 sm:px-6 py-4 transition-colors duration-200 hover:bg-white/5">
-      <div class="grid grid-cols-12 gap-4 items-start">
+    <div class="group relative px-4 sm:px-6 py-4 transition-colors duration-200 hover:bg-white/5">
+      <a href="{{ .RelPermalink }}" class="absolute inset-0 z-0" aria-label="{{ .Title }}"></a>
+      <div class="relative z-[1] grid grid-cols-12 gap-4 items-start pointer-events-none">
         <div class="col-span-12 md:col-span-8">
           <div class="text-xs sm:text-sm text-gray-500 font-mono">
             <span>{{ .Date.Format "Jan 02, 2006" }}</span>
@@ -30,17 +31,17 @@
           </div>
         </div>
 
-        <div class="col-span-12 md:col-span-4 flex md:justify-end flex-wrap gap-2">
-          {{- with .Params.tags -}}
+        <div class="col-span-12 md:col-span-4 flex md:justify-end flex-wrap gap-2 pointer-events-auto">
+          {{- with .GetTerms "tags" -}}
           {{- range . -}}
-          <span class="px-2 py-0.5 text-xs sm:text-sm rounded-sm border border-gray-700/70 text-gray-300 bg-black/30">
-            #{{ . }}
-          </span>
+          <a href="{{ .RelPermalink }}" class="relative z-10 px-2 py-0.5 text-xs sm:text-sm rounded-sm border border-gray-700/70 text-gray-300 bg-black/30 transition-colors duration-200 hover:border-emerald-500/70 hover:text-emerald-300">
+            #{{ .Title }}
+          </a>
           {{- end -}}
           {{- end -}}
         </div>
       </div>
-    </a>
+    </div>
     {{- end -}}
     {{- else -}}
     <div class="px-4 sm:px-6 py-10 text-gray-400">{{ T "no_entries" }}</div>
