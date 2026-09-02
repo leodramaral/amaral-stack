@@ -13,7 +13,9 @@
     {{- if gt (len $pages) 0 -}}
     {{- range $pages -}}
     <div class="group relative px-4 sm:px-6 py-4 transition-colors duration-200 hover:bg-white/5">
-      <a href="{{ .RelPermalink }}" class="absolute inset-0 z-0" aria-label="{{ .Title }}"></a>
+      <a href="{{ .RelPermalink }}"
+        class="absolute inset-0 z-0 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-400"
+        aria-label="{{ .Title }}"></a>
       <div class="relative z-[1] grid grid-cols-12 gap-4 items-start pointer-events-none">
         <div class="col-span-12 md:col-span-8">
           <div class="text-xs sm:text-sm text-gray-500 font-mono">
@@ -34,7 +36,7 @@
         <div class="col-span-12 md:col-span-4 flex md:justify-end flex-wrap gap-2 pointer-events-auto">
           {{- with .GetTerms "tags" -}}
           {{- range . -}}
-          <a href="{{ .RelPermalink }}" class="relative z-10 px-2 py-0.5 text-xs sm:text-sm rounded-sm border border-gray-700/70 text-gray-300 bg-black/30 transition-colors duration-200 hover:border-emerald-500/70 hover:text-emerald-300">
+          <a href="{{ .RelPermalink }}" class="relative z-10 px-2 py-0.5 text-xs sm:text-sm rounded-sm border border-gray-700/70 text-gray-300 bg-black/30 transition-colors duration-200 hover:border-emerald-500/70 hover:text-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-400">
             #{{ .Title }}
           </a>
           {{- end -}}

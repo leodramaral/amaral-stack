@@ -7,7 +7,9 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center gap-3">
-          <a href='{{ .Site.BaseURL | relLangURL }}' class="flex items-center gap-3 group" aria-label="{{ T "homepage" }}">
+          <a href='{{ .Site.BaseURL | relLangURL }}'
+            class="flex items-center gap-3 group rounded-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"
+            aria-label="{{ T "homepage" }}">
             <span class="text-blue-200 text-lg sm:text-xl md:text-2xl lg:text-3xl font-mono font-semibold tracking-wide">
               <span class="text-gray-500">{</span><span class="text-blue-400">amaral</span> <span class="text-gray-500">stack</span><span class="text-gray-500">}</span>
               <span class="inline-block ml-2" style="animation: flicker 1.6s steps(2, end) infinite;">_</span>
@@ -38,7 +40,7 @@
             </span>
             {{ else }}
             <a href="{{ $targetURL }}" data-no-swup
-              class="px-2 py-1 text-xs sm:text-sm border border-gray-700 rounded-sm text-gray-400 hover:text-white hover:border-gray-500 transition-colors">
+              class="px-2 py-1 text-xs sm:text-sm border border-gray-700 rounded-sm text-gray-400 hover:text-white hover:border-gray-500 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400">
               {{ .LanguageName }}
             </a>
             {{ end }}
@@ -87,7 +89,7 @@
           </span>
           {{ else }}
           <a href="{{ $targetURL }}" data-no-swup
-            class="px-2 py-1 text-xs sm:text-sm border border-gray-700 rounded-sm text-gray-400 hover:text-white transition-colors">
+            class="px-2 py-1 text-xs sm:text-sm border border-gray-700 rounded-sm text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400">
             {{ .LanguageName }}
           </a>
           {{ end }}

@@ -5,15 +5,17 @@
       <div class="text-sm sm:text-base md:text-lg">
         <span class="relative inline-block">
           &copy; {{ now.Year }} {{ site.Title }}. {{ T "all_rights" }} <br>
-          {{ T "made_with" }} <a href="https://gohugo.io" target="_blank">Hugo</a> | <a
-            href="https://github.com/Enerhim/enervoid-theme" target="_blank">Enervoid</a>
+          {{ T "made_with" }} <a href="https://gohugo.io" target="_blank"
+            class="rounded-sm focus:outline-none focus:ring-2 focus:ring-emerald-400">Hugo</a> | <a
+            href="https://github.com/Enerhim/enervoid-theme" target="_blank"
+            class="rounded-sm focus:outline-none focus:ring-2 focus:ring-emerald-400">Enervoid</a>
         </span>
       </div>
 
       <div class="flex items-center space-x-6 text-sm sm:text-base md:text-lg">
         {{ range site.Params.socials }}
         <a href='{{ .link }}' target="_blank" rel="noopener"
-          class="group relative inline-block transition-colors duration-200 hover:text-gray-200">
+          class="group relative inline-block rounded-sm transition-colors duration-200 hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-400">
           {{ .name }}
           <i class="{{ .icon }}"></i>
           <span

@@ -14,6 +14,12 @@ html:not([data-theme="light"]) .md-content a:hover {
   text-decoration-color: #6ee7b7;
 }
 
+.md-content a:focus {
+  outline: 2px solid #34d399;
+  outline-offset: 2px;
+  border-radius: 0.125rem;
+}
+
 html:not([data-theme="light"]) .bg-black {
   background-color: #111318 !important;
 }
