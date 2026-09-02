@@ -2,3 +2,5 @@ dev-flow.txt
 public/
 resources/
 .hugo_build.lock
+.claude/
+.impeccable/
