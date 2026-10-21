@@ -1,7 +1,12 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-  {{ end }}
+<header class="mb-8">
+  <p class="section-label text-muted">{{ .Data.Plural | title }}</p>
+  <h1 class="display-hero mt-3 font-display font-medium">#{{ .Title }}</h1>
+  <p class="meta-mono mt-3 text-muted">{{ len .Pages }} {{ T "posts_tagged" }}</p>
+</header>
+<div class="flex flex-col">
+  {{- range .Pages.ByDate.Reverse }}
+  {{ partial "post-row.html" . }}
+  {{- end }}
+</div>
 {{ end }}

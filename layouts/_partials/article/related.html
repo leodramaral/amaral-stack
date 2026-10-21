@@ -15,31 +15,11 @@
 {{- if gt (len $related) 0 }}
 {{- $related = $related | uniq }}
 {{- $related = first 3 $related }}
-<div class="mt-8 pt-6 border-t border-gray-800/70">
-  <p class="text-sm uppercase tracking-widest text-gray-500 mb-4">{{ T "related" }}</p>
-  <div class="grid gap-4 {{ if eq (len $related) 1 }}grid-cols-1 max-w-sm{{ else }}grid-cols-1 sm:grid-cols-2 lg:grid-cols-3{{ end }}">
-    {{- range $related }}
-    <a href="{{ .RelPermalink }}"
-      class="group block border border-gray-800/70 bg-[#070709] rounded-sm p-4 transition duration-200 hover:-translate-y-0.5 hover:bg-white/5 hover:border-emerald-400/30 focus:outline-none focus:ring-2 focus:ring-emerald-400">
-      <h3 class="text-base sm:text-lg text-white tracking-wide leading-snug mb-2">
-        <span class="relative inline-block">
-          {{ .Title }}
-          <span class="absolute left-0 -bottom-1 h-px w-0 bg-emerald-400 transition-all duration-300 group-hover:w-full"></span>
-        </span>
-      </h3>
-      <div class="text-xs text-gray-500 font-mono">
-        {{ .Date.Format "Jan 02, 2006" }}
-      </div>
-      {{- with .Params.tags }}
-      <div class="mt-2 flex flex-wrap gap-1">
-        {{- range . }}
-        <span class="px-1.5 py-0.5 text-xs rounded-sm border border-gray-700/70 text-gray-400">{{ . }}</span>
-        {{- end }}
-      </div>
-      {{- end }}
-    </a>
-    {{- end }}
+<section class="mt-12 border-t border-line pt-6">
+  <h2 class="section-label text-muted">{{ T "related" }}</h2>
+  <div class="mt-2 flex flex-col">
+    {{- range $related }}{{ partial "post-row.html" . }}{{ end }}
   </div>
-</div>
+</section>
 {{- end }}
 {{- end }}

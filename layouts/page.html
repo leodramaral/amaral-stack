@@ -1,10 +1,9 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
-
-{{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-{{ $dateHuman := .Date | time.Format ":date_long" }}
-<time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
-
-{{ .Content }}
-{{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+<article>
+  <header class="mb-8">
+    <h1 class="display-hero font-display font-medium">{{ .Title }}</h1>
+    {{- with .Description }}<p class="mt-4 max-w-[52ch] font-mono text-[0.8125rem]/5 text-pretty text-muted">{{ . }}</p>{{ end }}
+  </header>
+  <div class="md-content text-[0.9375rem] leading-relaxed">{{ .Content }}</div>
+</article>
 {{ end }}

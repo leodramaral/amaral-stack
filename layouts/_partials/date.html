@@ -1,0 +1,11 @@
+{{- /* Expects (dict "date" <time> "long" <bool>).
+   Not time.Format ":date_*": Hugo localizes by language key, and this site's pt-BR key is "br",
+   which is the ISO code for Breton. Month names come from i18n instead. */ -}}
+{{- $d := .date -}}
+{{- $key := cond .long "month_%d" "month_short_%d" -}}
+{{- $month := T (printf $key (int $d.Month)) -}}
+{{- if eq site.Language.Lang "br" -}}
+{{ $d.Day }} {{ if .long }}de {{ end }}{{ $month }}{{ if .long }} de{{ end }} {{ $d.Year }}
+{{- else -}}
+{{ $month }} {{ $d.Day }}, {{ $d.Year }}
+{{- end -}}

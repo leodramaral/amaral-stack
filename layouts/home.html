@@ -1,61 +1,48 @@
 {{ define "main" }}
-
-<section class="flex flex-col items-center justify-center text-center py-12 md:py-20">
-
-  <img src="{{ "perfil.jpg" | relURL }}" alt="Leandro Amaral"
-    class="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full border-4 border-blue-200/30 object-cover shadow-lg shadow-blue-200/10 mb-8" />
-
-  <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold text-white tracking-wide mb-3">
-    Leandro Amaral
+<section class="pb-4">
+  <p class="section-label reveal text-muted">{{ T "welcome" }}</p>
+  <h1 class="display-hero reveal reveal-1 mt-5 max-w-[24ch] font-display font-medium text-balance">
+    {{- site.Params.hero_title -}}
+    <span class="cursor-blink ml-2 inline-block h-[0.72em] w-[3px] translate-y-[0.08em] rounded-full bg-accent-deep" aria-hidden="true"></span>
   </h1>
-
-  <div class="max-w-xl space-y-4 text-gray-300 sm:text-lg md:text-xl leading-relaxed [&_a]:text-blue-200
-            [&_a]:underline
-            [&_a]:rounded-sm
-            [&_a:hover]:text-blue-100
-            [&_a]:transition-colors
-            [&_a]:duration-200
-            [&_a:focus]:outline-none
-            [&_a:focus]:ring-2
-            [&_a:focus]:ring-emerald-400">
-    {{ with site.GetPage "page" "about" }}
-    {{ .Content }}
-    {{ end }}
+  {{ with site.GetPage "page" "about" }}
+  {{ with .Description }}
+  <p class="reveal reveal-2 mt-5 max-w-[52ch] font-mono text-[0.8125rem]/5 text-pretty text-muted">{{ . }}</p>
+  {{ end }}
+  {{ end }}
+  {{ with site.GetPage "section" "blog" }}
+  <div class="reveal reveal-3 mt-7">
+    <a href="{{ .RelPermalink }}" class="group section-label inline-flex items-center gap-2 text-accent hover:text-ink">
+      {{ T "browse_articles" }}
+      <svg viewBox="0 0 16 16" fill="currentColor" class="size-4 shrink-0 transition-transform duration-150 group-hover:translate-x-0.5" aria-hidden="true"><path fill-rule="evenodd" d="M2 8a.75.75 0 0 1 .75-.75h8.69L8.22 4.03a.75.75 0 0 1 1.06-1.06l4.5 4.5a.75.75 0 0 1 0 1.06l-4.5 4.5a.75.75 0 0 1-1.06-1.06l3.22-3.22H2.75A.75.75 0 0 1 2 8Z" clip-rule="evenodd"/></svg>
+    </a>
   </div>
-
+  {{ end }}
 </section>
+
+{{ with site.GetPage "page" "about" }}
+<section class="py-10 sm:py-14">
+  <h2 class="section-label text-muted">{{ T "about_me" }}</h2>
+  <div class="md-content mt-6 text-[0.9375rem] leading-relaxed">{{ .Content }}</div>
+</section>
+{{ end }}
 
 {{ with site.GetPage "section" "blog" }}
 {{ $blog := . }}
 {{ $latest := $blog.RegularPages.ByDate.Reverse | first 3 }}
 {{ if gt (len $latest) 0 }}
-<section class="w-full max-w-2xl mx-auto px-4 sm:px-6 pb-16 text-left">
-  <h2 class="text-sm uppercase tracking-widest text-gray-500 mb-4">{{ T "latest_posts" }}</h2>
-
-  <div class="border border-gray-800/70 rounded-sm bg-[#070709] divide-y divide-gray-800/80 overflow-hidden">
-    {{ range $latest }}
-    <a href="{{ .RelPermalink }}"
-      class="group block px-4 sm:px-6 py-4 transition-colors duration-200 hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-400">
-      <div class="text-xs sm:text-sm text-gray-500 font-mono">{{ .Date.Format "Jan 02, 2006" }}</div>
-      <div class="mt-1 text-base sm:text-lg text-gray-100">
-        <span class="relative inline-block">
-          {{ .Title }}
-          <span
-            class="absolute left-0 -bottom-1 h-px w-0 bg-emerald-400 transition-all duration-300 group-hover:w-full"></span>
-        </span>
-      </div>
+<section class="py-10 sm:py-14">
+  <div class="flex items-baseline justify-between gap-4">
+    <h2 class="section-label text-muted">{{ T "latest_posts" }}</h2>
+    <a href="{{ $blog.RelPermalink }}" class="group section-label inline-flex items-center gap-1.5 text-accent hover:text-ink">
+      {{ T "view_all_posts" }}
+      <svg viewBox="0 0 16 16" fill="currentColor" class="size-3.5 shrink-0 transition-transform duration-150 group-hover:translate-x-0.5" aria-hidden="true"><path fill-rule="evenodd" d="M2 8a.75.75 0 0 1 .75-.75h8.69L8.22 4.03a.75.75 0 0 1 1.06-1.06l4.5 4.5a.75.75 0 0 1 0 1.06l-4.5 4.5a.75.75 0 0 1-1.06-1.06l3.22-3.22H2.75A.75.75 0 0 1 2 8Z" clip-rule="evenodd"/></svg>
     </a>
-    {{ end }}
   </div>
-
-  <div class="mt-6 text-center">
-    <a href="{{ $blog.RelPermalink }}"
-      class="inline-block rounded-sm text-sm text-emerald-400 underline underline-offset-4 transition-colors duration-200 hover:text-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-400">
-      {{ T "view_all_posts" }} &rarr;
-    </a>
+  <div class="mt-4 flex flex-col">
+    {{ range $latest }}{{ partial "post-row.html" . }}{{ end }}
   </div>
 </section>
 {{ end }}
 {{ end }}
-
 {{ end }}

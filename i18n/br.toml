@@ -69,3 +69,84 @@ other = "Tema do sistema"
 
 [theme_dark]
 other = "Tema escuro"
+
+[welcome]
+other = "Bem-vindo"
+
+[browse_articles]
+other = "Ver artigos"
+
+[posts_tagged]
+other = "posts com esta tag."
+
+[month_1]
+other = "janeiro"
+
+[month_short_1]
+other = "jan"
+
+[month_2]
+other = "fevereiro"
+
+[month_short_2]
+other = "fev"
+
+[month_3]
+other = "março"
+
+[month_short_3]
+other = "mar"
+
+[month_4]
+other = "abril"
+
+[month_short_4]
+other = "abr"
+
+[month_5]
+other = "maio"
+
+[month_short_5]
+other = "mai"
+
+[month_6]
+other = "junho"
+
+[month_short_6]
+other = "jun"
+
+[month_7]
+other = "julho"
+
+[month_short_7]
+other = "jul"
+
+[month_8]
+other = "agosto"
+
+[month_short_8]
+other = "ago"
+
+[month_9]
+other = "setembro"
+
+[month_short_9]
+other = "set"
+
+[month_10]
+other = "outubro"
+
+[month_short_10]
+other = "out"
+
+[month_11]
+other = "novembro"
+
+[month_short_11]
+other = "nov"
+
+[month_12]
+other = "dezembro"
+
+[month_short_12]
+other = "dez"

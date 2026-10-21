@@ -1,10 +1,13 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <section>
-      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-      {{ .Summary }}
-    </section>
-  {{ end }}
+<header class="mb-8">
+  <h1 class="display-hero font-display font-medium">{{ .Title }}</h1>
+  {{- with .Content }}<div class="md-content mt-4 text-[0.9375rem]">{{ . }}</div>{{ end }}
+</header>
+<div class="flex flex-col">
+  {{- range .Pages.ByDate.Reverse }}
+  {{ partial "post-row.html" . }}
+  {{- else }}
+  <p class="py-10 text-muted">{{ T "no_entries" }}</p>
+  {{- end }}
+</div>
 {{ end }}

@@ -1,155 +1,32 @@
 {{ define "main" }}
-<div class="grid grid-cols-12 gap-8">
-  <aside class="hidden lg:block col-span-3">
-    <div class="sticky top-24">
-      <div class="mb-3 text-xs uppercase tracking-widest text-gray-500">{{ T "table_of_contents" }}</div>
-
-      {{- if .TableOfContents -}}
-      <nav class="toc border border-gray-800/70 bg-[#070709] rounded-sm p-4 text-base text-gray-300">
-        {{ .TableOfContents }}
-      </nav>
-      {{- else -}}
-      <div class="border border-gray-800/70 bg-[#070709] rounded-sm p-4 text-base text-gray-500">
-        {{ T "no_headings" }}
-      </div>
-      {{- end -}}
+<div class="lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-12">
+  <aside class="hidden lg:block">
+    <div class="sticky top-8">
+      <p class="section-label mb-3 text-muted">{{ T "table_of_contents" }}</p>
+      {{- if .TableOfContents }}
+      <nav class="toc" aria-label="{{ T "table_of_contents" }}">{{ .TableOfContents }}</nav>
+      {{- else }}
+      <p class="meta-mono text-muted">{{ T "no_headings" }}</p>
+      {{- end }}
     </div>
   </aside>
 
-  <article class="col-span-12 lg:col-span-9">
+  <article class="min-w-0">
     {{ partial "article/meta.html" . }}
 
-    <div class="lg:hidden mb-6">
-      <details class="border border-gray-800/70 bg-[#070709] rounded-sm">
-        <summary
-          class="cursor-pointer select-none px-4 py-3 text-gray-200 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-400">
-          {{ T "table_of_contents" }}
-        </summary>
-        <div class="px-4 pb-4 toc text-base text-gray-300">
-          {{ .TableOfContents }}
-        </div>
-      </details>
-    </div>
+    {{- if .TableOfContents }}
+    <details class="mb-8 rounded-lg border border-line lg:hidden">
+      <summary class="section-label cursor-pointer select-none px-4 py-3 text-muted hover:text-ink">{{ T "table_of_contents" }}</summary>
+      <nav class="toc px-4 pb-4" aria-label="{{ T "table_of_contents" }}">{{ .TableOfContents }}</nav>
+    </details>
+    {{- end }}
 
-    <div class="border border-gray-800/70 bg-[#070709] rounded-sm p-5 sm:p-7">
-      <div class="md-content font-reading max-w-prose text-base sm:text-lg leading-relaxed text-[#c9d1d9]">
-        {{ .Content }}
-      </div>
+    <div class="md-content max-w-[44rem] text-[0.9375rem] leading-relaxed sm:text-base">
+      {{ .Content }}
     </div>
 
     {{ partial "article/share.html" . }}
     {{ partial "article/related.html" . }}
   </article>
 </div>
-
-<style>
-  .toc {
-    font-size: 0.95rem;
-    line-height: 1.35;
-  }
-
-  .toc ul {
-    list-style: none;
-    margin: 0;
-    padding-left: 0;
-  }
-
-  .toc li {
-    position: relative;
-    margin: 0.35rem 0;
-    padding-left: 1.25rem;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
-
-  .toc a {
-    display: block;
-    padding: 0.15rem 0;
-    color: rgba(209, 213, 219, 0.92);
-    text-decoration: none;
-  }
-
-  .toc a:focus {
-    outline: 2px solid rgb(52, 211, 153);
-    outline-offset: 2px;
-    border-radius: 0.125rem;
-  }
-
-  .toc a:hover {
-    color: #fff;
-    text-decoration: underline;
-    text-decoration-color: rgba(5, 150, 105, 0.85);
-    text-underline-offset: 3px;
-  }
-
-  .toc ul ul {
-    margin: 0.4rem 0 0.4rem 0.35rem;
-    padding-left: 0.9rem;
-    border-left: 1px solid rgba(55, 65, 81, 0.6);
-  }
-
-  .toc ul ul>li {
-    padding-left: 1.75rem;
-  }
-
-  .toc ul ul>li::before {
-    content: "\251C";
-    position: absolute;
-    left: 0.35rem;
-    top: 0.2rem;
-    color: rgba(5, 150, 105, 0.75);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  }
-
-  .toc ul ul>li:last-child::before {
-    content: "\2514";
-  }
-
-  @media (min-width: 1024px) {
-    .toc {
-      max-height: calc(100vh - 9rem);
-      overflow: auto;
-      padding-right: 0.25rem;
-    }
-  }
-
-  .md-content ul,
-  .md-content ol {
-    margin: 1rem 0;
-    padding-left: 1.35rem;
-  }
-
-  .md-content ul {
-    list-style: disc;
-  }
-
-  .md-content ul ul {
-    list-style: circle;
-  }
-
-  .md-content ul ul ul {
-    list-style: square;
-  }
-
-  .md-content ol {
-    list-style: decimal;
-  }
-
-  .md-content ol ol {
-    list-style: lower-roman;
-  }
-
-  .md-content ol ol ol {
-    list-style: lower-alpha;
-  }
-
-  .md-content li {
-    margin: 0.35rem 0;
-  }
-
-  .md-content pre,
-  .md-content code {
-    tab-size: 4;
-  }
-</style>
 {{ end }}

@@ -1,7 +1,14 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-  {{ end }}
+<header class="mb-8">
+  <h1 class="display-hero font-display font-medium">{{ .Title }}</h1>
+</header>
+<ul role="list" class="flex flex-wrap gap-2">
+  {{- range .Data.Terms.Alphabetical }}
+  <li>
+    <a href="{{ .Page.RelPermalink }}" class="press meta-mono inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 text-muted hover:border-accent hover:text-accent">
+      #{{ .Page.LinkTitle }} <span class="text-muted/70">{{ .Count }}</span>
+    </a>
+  </li>
+  {{- end }}
+</ul>
 {{ end }}

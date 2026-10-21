@@ -69,3 +69,84 @@ other = "System theme"
 
 [theme_dark]
 other = "Dark theme"
+
+[welcome]
+other = "Welcome"
+
+[browse_articles]
+other = "Browse articles"
+
+[posts_tagged]
+other = "posts with this tag."
+
+[month_1]
+other = "January"
+
+[month_short_1]
+other = "Jan"
+
+[month_2]
+other = "February"
+
+[month_short_2]
+other = "Feb"
+
+[month_3]
+other = "March"
+
+[month_short_3]
+other = "Mar"
+
+[month_4]
+other = "April"
+
+[month_short_4]
+other = "Apr"
+
+[month_5]
+other = "May"
+
+[month_short_5]
+other = "May"
+
+[month_6]
+other = "June"
+
+[month_short_6]
+other = "Jun"
+
+[month_7]
+other = "July"
+
+[month_short_7]
+other = "Jul"
+
+[month_8]
+other = "August"
+
+[month_short_8]
+other = "Aug"
+
+[month_9]
+other = "September"
+
+[month_short_9]
+other = "Sep"
+
+[month_10]
+other = "October"
+
+[month_short_10]
+other = "Oct"
+
+[month_11]
+other = "November"
+
+[month_short_11]
+other = "Nov"
+
+[month_12]
+other = "December"
+
+[month_short_12]
+other = "Dec"

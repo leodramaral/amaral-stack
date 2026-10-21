@@ -12,6 +12,8 @@
   --c-accent: #848ce0;
   --c-accent-deep: #616acb;
   --c-accent-soft: #1f2140;
+  --c-warn: #fbbf24;
+  --c-ok: #34d399;
 }
 
 :root[data-theme="light"] {
@@ -25,6 +27,8 @@
   --c-accent: #616acb;
   --c-accent-deep: #616acb;
   --c-accent-soft: #e6e8f9;
+  --c-warn: #b45309;
+  --c-ok: #047857;
 }
 
 @media (prefers-color-scheme: light) {
@@ -39,6 +43,8 @@
     --c-accent: #616acb;
     --c-accent-deep: #616acb;
     --c-accent-soft: #e6e8f9;
+    --c-warn: #b45309;
+    --c-ok: #047857;
   }
 }
 
@@ -126,7 +132,22 @@ body {
   }
 }
 
-/* Article prose */
+/* Article prose (rendered Markdown inside .md-content). Tailwind's preflight strips
+   list/paragraph defaults, so they are restored here. */
+.md-content > * + * { margin-top: 1rem; }
+.md-content p { margin: 1rem 0; }
+.md-content ul,
+.md-content ol { margin: 1rem 0; padding-left: 1.35rem; }
+.md-content ul { list-style: disc; }
+.md-content ul ul { list-style: circle; }
+.md-content ul ul ul { list-style: square; }
+.md-content ol { list-style: decimal; }
+.md-content ol ol { list-style: lower-roman; }
+.md-content ol ol ol { list-style: lower-alpha; }
+.md-content li { margin: 0.35rem 0; }
+.md-content hr { margin: 2rem 0; border-color: var(--c-line); }
+.md-content strong { font-weight: 600; }
+
 .md-content a {
   color: var(--c-accent);
   text-decoration: underline;
@@ -134,42 +155,38 @@ body {
   text-underline-offset: 3px;
 }
 
-.md-content a:hover {
-  text-decoration-color: var(--c-accent);
-}
+.md-content a:hover { text-decoration-color: var(--c-accent); }
 
-.md-content pre,
-.md-content code {
+.md-content :not(pre) > code {
   background-color: var(--c-shell);
+  border: 1px solid var(--c-line);
+  border-radius: 0.25rem;
+  padding: 0.1em 0.35em;
+  font-family: var(--font-mono, "Geist Mono", monospace);
+  font-size: 0.875em;
 }
 
-/* ------------------------------------------------------------------
-   TEMPORARY bridge: pages not yet migrated still use the old utility
-   classes. Maps them onto the tokens; delete once pages are migrated.
-   ------------------------------------------------------------------ */
-.bg-black { background-color: var(--c-canvas) !important; }
-.bg-\[\#070709\],
-.bg-\[\#070709\]\/80,
-.bg-\[\#070709\]\/95 { background-color: var(--c-shell) !important; }
-.bg-black\/30,
-.bg-black\/40 { background-color: var(--c-shell) !important; }
-.border-gray-800,
-.border-gray-800\/70,
-.border-gray-800\/80,
-.border-gray-700,
-.border-gray-700\/70 { border-color: var(--c-line) !important; }
-.divide-gray-800\/80 > :not(:last-child) { border-color: var(--c-line) !important; }
-.text-white,
-.text-gray-100,
-.text-gray-200,
-.text-gray-300 { color: var(--c-ink) !important; }
-.text-gray-400,
-.text-gray-500,
-.text-gray-600,
-.text-gray-700 { color: var(--c-muted) !important; }
-.text-emerald-400,
-.text-blue-200,
-.hover\:text-emerald-300:hover { color: var(--c-accent) !important; }
-.bg-emerald-400 { background-color: var(--c-accent) !important; }
-.hover\:bg-white\/5:hover { background-color: var(--c-shell) !important; }
-.focus\:ring-emerald-400:focus { --tw-ring-color: var(--c-accent) !important; }
+.codewrap pre,
+.codewrap .chroma { background: transparent !important; margin: 0 !important; }
+.codewrap pre { padding: 0 !important; overflow: visible !important; }
+.codewrap code {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  font-family: var(--font-mono, "Geist Mono", monospace);
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  tab-size: 4;
+}
+
+/* Table of contents (Hugo's generated <nav id="TableOfContents"> list) */
+.toc { font-size: 0.8125rem; line-height: 1.4; }
+.toc ul { list-style: none; margin: 0; padding: 0; }
+.toc li { margin: 0.4rem 0; overflow-wrap: anywhere; }
+.toc ul ul { margin: 0.4rem 0 0.4rem 0.25rem; padding-left: 0.75rem; border-left: 1px solid var(--c-line); }
+.toc a { display: block; padding: 0.1rem 0; color: var(--c-muted); text-decoration: none; }
+.toc a:hover { color: var(--c-ink); }
+
+@media (min-width: 1024px) {
+  .toc { max-height: calc(100vh - 9rem); overflow: auto; }
+}
