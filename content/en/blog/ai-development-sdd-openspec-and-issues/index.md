@@ -48,21 +48,13 @@ The Issue is where everything starts: it describes the problem, what is wanted a
 
 ## The flow
 
-```mermaid
-flowchart LR
-  A[Issue] --> B[explore]
-  B --> C[propose]
-  C --> D[review the plan]
-  D --> E[implement]
-  E --> F[verify]
-```
+{{< figure src="flow.svg" alt="Flow in five steps: Issue, propose, review the plan, implement and verify" >}}
 
 1. **Issue.** The problem and the acceptance criteria.
-2. **Explore.** If the idea can be read more than one way, I talk it through with the agent before proposing anything.
-3. **Propose.** The agent generates proposal, specs, design and tasks in one go.
-4. **Review the plan.** I read everything, cut, adjust and decide. It is the stage where mistakes are cheapest, because changing a sentence costs far less than changing a finished screen.
-5. **Implement.** The agent follows the tasks in order and only ticks one once it has checked that it works.
-6. **Verify.** Tests, spec validation and a manual check in the browser, against the Issue's criteria.
+2. **Propose.** The agent generates proposal, specs, design and tasks in one go.
+3. **Review the plan.** I read everything, cut, adjust and decide. It is the stage where mistakes are cheapest, because changing a sentence costs far less than changing a finished screen.
+4. **Implement.** The agent follows the tasks in order and only ticks one once it has checked that it works.
+5. **Verify.** This is also done by the agent. It runs the tests, validates the specs and opens the app in the browser through the Playwright MCP, comparing the result with the Issue's criteria.
 
 Whatever shows up along the way has a clear destination. If it is part of the scope, it becomes a task **before** it is done. If not, it becomes a new Issue and the current work does not drift.
 
@@ -78,7 +70,7 @@ Whatever shows up along the way has a clear destination. If it is part of the sc
 
 **A detour, handled the way the flow says.** Along the way I realized the deadline field needed a date picker. It was within scope, so it became a new group of tasks in the same plan (with the chosen library and the reason noted) and only then was it done. Had it been something else, it would have become an Issue.
 
-**Verify.** The last task was to check, one by one, the spec's requirements and the Issue's acceptance criteria against the app and the tests. Only then was the change archived, and the goals spec became part of the project's specs.
+**Verify.** The last task asked the agent to check, one by one, the spec's requirements and the Issue's acceptance criteria against the app and the tests. Only then was the change archived, and the goals spec became part of the project's specs.
 
 ## Why it works for me
 
@@ -106,7 +98,7 @@ To decide, I ask myself which is more expensive, writing the plan or fixing late
 
 You can try it on a project of your own in an afternoon.
 
-1. Install [OpenSpec](https://github.com/Fission-AI/OpenSpec) with `npm install -g @fission-ai/openspec` and run `openspec init --tools claude` at the root of the repository. This creates the `openspec/` folder and the `/opsx:explore`, `/opsx:propose`, `/opsx:apply` and `/opsx:archive` commands in Claude Code.
+1. Install [OpenSpec](https://github.com/Fission-AI/OpenSpec) with `npm install -g @fission-ai/openspec` and run `openspec init --tools claude` at the root of the repository. This creates the `openspec/` folder and the `/opsx:propose`, `/opsx:apply` and `/opsx:archive` commands in Claude Code.
 2. Ask the agent itself to fill in `openspec/config.yaml` with the project's stack, language and rules, and to write the rule "do not implement without a change" in `AGENTS.md`.
 3. Pick a small Issue that still touches a real rule or screen. Create a branch with its number and run `/opsx:propose`.
 4. Read the proposal, the specs and the tasks carefully, adjust whatever you do not like and only then run `/opsx:apply`.

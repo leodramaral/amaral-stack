@@ -48,21 +48,13 @@ A Issue é onde tudo começa: descreve o problema, o que se quer e os critérios
 
 ## O fluxo
 
-```mermaid
-flowchart LR
-  A[Issue] --> B[explorar]
-  B --> C[propor]
-  C --> D[revisar o plano]
-  D --> E[implementar]
-  E --> F[verificar]
-```
+{{< figure src="fluxo.svg" alt="Fluxo em cinco passos: Issue, propor, revisar o plano, implementar e verificar" >}}
 
 1. **Issue.** O problema e os critérios de aceitação.
-2. **Explorar.** Se a ideia pode ser lida de mais de um jeito, converso com o agente antes de propor qualquer coisa.
-3. **Propor.** O agente gera proposal, specs, design e tasks de uma vez.
-4. **Revisar o plano.** Eu leio tudo, corto, ajusto e decido. É a etapa em que errar sai mais barato, porque mudar uma frase custa muito menos do que mudar uma tela pronta.
-5. **Implementar.** O agente segue as tasks na ordem e só marca uma como feita depois de conferir que funciona.
-6. **Verificar.** Testes, validação das specs e uma conferência manual no navegador, comparando com os critérios da Issue.
+2. **Propor.** O agente gera proposal, specs, design e tasks de uma vez.
+3. **Revisar o plano.** Eu leio tudo, corto, ajusto e decido. É a etapa em que errar sai mais barato, porque mudar uma frase custa muito menos do que mudar uma tela pronta.
+4. **Implementar.** O agente segue as tasks na ordem e só marca uma como feita depois de conferir que funciona.
+5. **Verificar.** Também é o agente que faz. Ele roda os testes, valida as specs e abre o app no navegador pelo MCP do Playwright, comparando o resultado com os critérios da Issue.
 
 O que aparece no meio do caminho tem destino certo. Se faz parte do escopo, vira task **antes** de ser feito. Se não faz, vira uma Issue nova e o trabalho atual não se desvia.
 
@@ -78,7 +70,7 @@ A [Issue #9](https://github.com/leodramaral/projeto-gestor-financeiro/issues/9) 
 
 **Um desvio, tratado como manda o fluxo.** No meio do caminho, percebi que o campo de prazo pedia um seletor de data. Era do escopo, então virou um novo grupo de tasks no mesmo plano (com a biblioteca escolhida e o motivo anotados) e só depois foi feito. Se fosse outra coisa, teria virado Issue.
 
-**Verificar.** A última task era conferir, um a um, os requisitos da spec e os critérios de aceitação da Issue contra o app e os testes. Só então a change foi arquivada, e a spec de metas passou a fazer parte das specs do projeto.
+**Verificar.** A última task pedia ao agente que conferisse, um a um, os requisitos da spec e os critérios de aceitação da Issue contra o app e os testes. Só então a change foi arquivada, e a spec de metas passou a fazer parte das specs do projeto.
 
 ## Por que funciona para mim
 
@@ -106,7 +98,7 @@ Para decidir, me pergunto o que sai mais caro, escrever o plano ou consertar dep
 
 Dá para testar num projeto seu em uma tarde.
 
-1. Instale o [OpenSpec](https://github.com/Fission-AI/OpenSpec) com `npm install -g @fission-ai/openspec` e rode `openspec init --tools claude` na raiz do repositório. Isso cria a pasta `openspec/` e os comandos `/opsx:explore`, `/opsx:propose`, `/opsx:apply` e `/opsx:archive` no Claude Code.
+1. Instale o [OpenSpec](https://github.com/Fission-AI/OpenSpec) com `npm install -g @fission-ai/openspec` e rode `openspec init --tools claude` na raiz do repositório. Isso cria a pasta `openspec/` e os comandos `/opsx:propose`, `/opsx:apply` e `/opsx:archive` no Claude Code.
 2. Peça ao próprio agente para preencher o `openspec/config.yaml` com a stack, o idioma e as regras do projeto, e para escrever no `AGENTS.md` a regra "não implemente sem uma change".
 3. Escolha uma Issue pequena, mas que mexa em alguma regra ou tela de verdade. Crie uma branch com o número dela e rode `/opsx:propose`.
 4. Leia a proposta, as specs e as tasks com calma, ajuste o que não gostar e só então rode `/opsx:apply`.
