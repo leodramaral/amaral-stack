@@ -15,7 +15,7 @@
     <div class="isolate flex min-h-dvh flex-col bg-panel lg:m-2 lg:min-h-[calc(100dvh-1rem)] lg:rounded-xl lg:border lg:border-line">
       <main id="main" class="flex-1">
         <div id="swup" class="swup-transition-fade">
-          <div class="mx-auto w-full {{ if and .IsPage (eq .Section "blog") }}max-w-5xl{{ else }}max-w-3xl{{ end }} px-6 py-10 sm:px-10 lg:py-16">
+          <div class="mx-auto w-full max-w-3xl px-6 py-10 sm:px-10 lg:py-16">
             {{ block "main" . }}{{ end }}
           </div>
         </div>

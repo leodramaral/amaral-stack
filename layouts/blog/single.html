@@ -1,32 +1,19 @@
 {{ define "main" }}
-<div class="lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-12">
-  <aside class="hidden lg:block">
-    <div class="sticky top-8">
-      <p class="section-label mb-3 text-muted">{{ T "table_of_contents" }}</p>
-      {{- if .TableOfContents }}
-      <nav class="toc" aria-label="{{ T "table_of_contents" }}">{{ .TableOfContents }}</nav>
-      {{- else }}
-      <p class="meta-mono text-muted">{{ T "no_headings" }}</p>
-      {{- end }}
-    </div>
-  </aside>
+<article class="min-w-0">
+  {{ partial "article/meta.html" . }}
 
-  <article class="min-w-0">
-    {{ partial "article/meta.html" . }}
+  {{- if .TableOfContents }}
+  <details class="mb-8 max-w-[44rem] rounded-lg border border-line">
+    <summary class="section-label cursor-pointer select-none px-4 py-3 text-muted hover:text-ink">{{ T "table_of_contents" }}</summary>
+    <nav class="toc px-4 pb-4" aria-label="{{ T "table_of_contents" }}">{{ .TableOfContents }}</nav>
+  </details>
+  {{- end }}
 
-    {{- if .TableOfContents }}
-    <details class="mb-8 rounded-lg border border-line lg:hidden">
-      <summary class="section-label cursor-pointer select-none px-4 py-3 text-muted hover:text-ink">{{ T "table_of_contents" }}</summary>
-      <nav class="toc px-4 pb-4" aria-label="{{ T "table_of_contents" }}">{{ .TableOfContents }}</nav>
-    </details>
-    {{- end }}
+  <div class="md-content max-w-[44rem] text-[0.9375rem] leading-relaxed sm:text-base">
+    {{ .Content }}
+  </div>
 
-    <div class="md-content max-w-[44rem] text-[0.9375rem] leading-relaxed sm:text-base">
-      {{ .Content }}
-    </div>
-
-    {{ partial "article/share.html" . }}
-    {{ partial "article/related.html" . }}
-  </article>
-</div>
+  {{ partial "article/share.html" . }}
+  {{ partial "article/related.html" . }}
+</article>
 {{ end }}

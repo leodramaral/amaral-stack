@@ -28,11 +28,11 @@ Personal bilingual (pt-BR / en) blog and mini-CV site for Leandro Amaral, built 
 
 ## Layouts
 
-- `baseof.html` — skip link, `header.html`, then the content panel (`lg:pl-72`, rounded bordered `bg-panel`) holding `#main`, the Swup container `#swup` and the footer. Blog posts get a wider container (`max-w-5xl`) for the TOC column; everything else is `max-w-3xl`.
+- `baseof.html` — skip link, `header.html`, then the content panel (`lg:pl-72`, rounded bordered `bg-panel`) holding `#main`, the Swup container `#swup` and the footer. Every page uses the same `max-w-3xl` container.
 - `_partials/header.html` — the whole site chrome in `#site-nav`: a fixed identity sidebar (`lg+`; avatar, `params.name` / `params.role`, `homepage_description`, menu, socials, language, theme toggle) and a sticky bar with a collapsible menu below `lg`. It also holds the one-time script for the burger menu and theme toggle (event delegation, so it survives Swup swaps). Social links come from `params.socials` (each needs `name`, `link`, `icon`).
 - `_partials/menu.html` — menu from `[[languages.*.menus.main]]`; the icon comes from the entry's `params.icon` (`home` | `pencil` | `user`; add new SVG paths to the dict in the partial).
 - `_partials/post-row.html` — the single editorial post row, used by the home page, blog list, section/term pages and related posts. The title link is stretched over the row (`after:inset-0`) and the tag links sit above it (`z-10`), so don't nest anchors.
-- `home.html` (hero text from `params.hero_title`, intro from the `about` page's `description`, about body, latest 3 posts), `blog/list.html`, `blog/single.html` (sticky TOC column on `lg`, collapsible TOC below), `section.html`, `term.html`, `taxonomy.html`, `page.html`. Sections with no dedicated layout (e.g. a future `projects/`) fall back to `section.html`.
+- `home.html` (hero text from `params.hero_title`, intro from the `about` page's `description`, about body, latest 3 posts), `blog/list.html`, `blog/single.html` (collapsible TOC above the post body; no sticky TOC column, to match the Index template), `section.html`, `term.html`, `taxonomy.html`, `page.html`. Sections with no dedicated layout (e.g. a future `projects/`) fall back to `section.html`.
 - `_markup/` render hooks: heading (hover `#` anchor), blockquote (GitHub-style alerts, captioned and plain quotes), codeblock (Mermaid + highlighted code, always on a dark ground), image, table.
 - `_partials/head/` — `css.html` (theme-init script, Tailwind CDN, token mapping, fonts), `js.html` (Swup; its `containers` are `#swup` and `#site-nav`), `katex.html`, `mermaid.html`, `opengraph.html`.
 

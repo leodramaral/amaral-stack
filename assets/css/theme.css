@@ -14,6 +14,7 @@
   --c-accent-soft: #1f2140;
   --c-warn: #fbbf24;
   --c-ok: #34d399;
+  --c-select: color-mix(in srgb, var(--c-accent) 40%, transparent);
 }
 
 :root[data-theme="light"] {
@@ -29,6 +30,7 @@
   --c-accent-soft: #e6e8f9;
   --c-warn: #b45309;
   --c-ok: #047857;
+  --c-select: color-mix(in srgb, var(--c-accent) 24%, transparent);
 }
 
 @media (prefers-color-scheme: light) {
@@ -45,6 +47,7 @@
     --c-accent-soft: #e6e8f9;
     --c-warn: #b45309;
     --c-ok: #047857;
+    --c-select: color-mix(in srgb, var(--c-accent) 24%, transparent);
   }
 }
 
@@ -54,7 +57,8 @@ body {
 }
 
 ::selection {
-  background: var(--c-accent-soft);
+  background: var(--c-select);
+  color: var(--c-ink);
 }
 
 :focus-visible {
@@ -186,7 +190,3 @@ body {
 .toc ul ul { margin: 0.4rem 0 0.4rem 0.25rem; padding-left: 0.75rem; border-left: 1px solid var(--c-line); }
 .toc a { display: block; padding: 0.1rem 0; color: var(--c-muted); text-decoration: none; }
 .toc a:hover { color: var(--c-ink); }
-
-@media (min-width: 1024px) {
-  .toc { max-height: calc(100vh - 9rem); overflow: auto; }
-}
