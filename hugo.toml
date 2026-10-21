@@ -1,7 +1,6 @@
 baseURL = '/'
 defaultContentLanguage = 'br'
 defaultContentLanguageInSubdir = true
-theme = 'enervoid'
 
 [languages]
   [languages.br]
