@@ -1,4 +1,30 @@
+{{- /* Runs before any stylesheet so the stored theme is applied without a flash.
+   localStorage.theme is "light" | "dark" | absent (= follow the system). */ -}}
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+  @theme inline {
+    --color-canvas: var(--c-canvas);
+    --color-panel: var(--c-panel);
+    --color-shell: var(--c-shell);
+    --color-line: var(--c-line);
+    --color-ink: var(--c-ink);
+    --color-muted: var(--c-muted);
+    --color-accent: var(--c-accent);
+    --color-accent-deep: var(--c-accent-deep);
+    --color-accent-soft: var(--c-accent-soft);
+    --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --font-display: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+</style>
 <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
   integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
@@ -8,21 +34,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap">
+  href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap">
 <style>
-  .font-jersey {
-    font-family: "Ubuntu Sans Mono", monospace;
-    font-optical-sizing: auto;
-    font-style: normal;
-  }
-
-  .font-reading {
-    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-  }
-
-
   .md-content .katex-display {
     max-width: 100%;
     overflow-x: auto;
@@ -35,15 +48,6 @@
   .md-content .katex-display>.katex {
     display: inline-block;
     max-width: 100%;
-  }
-
-  .swup-transition-fade {
-    opacity: 1;
-    transition: 300ms ease-in-out;
-  }
-
-  .is-animating .swup-transition-fade {
-    opacity: 0;
   }
 
   .swup-transition-fade {
@@ -63,6 +67,3 @@
     opacity: 0;
   }
 </style>
-<script>
-  (function(){var t=localStorage.getItem('theme');if(t==='light')document.documentElement.setAttribute('data-theme','light')})();
-</script>

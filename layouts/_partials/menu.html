@@ -1,38 +1,32 @@
 {{- /*
 menu.html
-Expects: (dict "menuID" "main" "page" .)
+Expects: (dict "menuID" "main" "page" . "compact" bool)
+Entries take their icon from the menu entry's params.icon (home | pencil | user).
 */ -}}
 
 {{- $page := .page -}}
 {{- $menuID := .menuID -}}
+{{- $compact := .compact -}}
+{{- $icons := dict
+  "home" `<path d="M8.543 2.232a.75.75 0 0 0-1.085 0l-5.25 5.5A.75.75 0 0 0 2.75 9H4v4a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 1 1 2 0v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V9h1.25a.75.75 0 0 0 .543-1.268l-5.25-5.5Z"/>`
+  "pencil" `<path fill-rule="evenodd" d="M11.013 2.513a1.75 1.75 0 0 1 2.475 2.474L6.226 12.25a2.751 2.751 0 0 1-.892.596l-2.047.848a.75.75 0 0 1-.98-.98l.848-2.047a2.75 2.75 0 0 1 .596-.892l7.262-7.261Z" clip-rule="evenodd"/>`
+  "user" `<path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z"/>`
+-}}
 
 {{- with index site.Menus $menuID }}
-<nav aria-label="Primary" class="w-full">
-  <ul
-    class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 sm:text-lg md:text-xl lg:text-3xl">
+<nav aria-label="{{ T "main_navigation" }}">
+  <ul role="list" class="flex flex-col gap-1.5">
     {{- range . }}
-    {{- $attrs := dict "href" (.URL | relURL) -}}
-    {{- if $page.IsMenuCurrent .Menu . }}
-    {{- $attrs = merge $attrs (dict "aria-current" "page") -}}
-    {{- else if $page.HasMenuCurrent .Menu . }}
-    {{- $attrs = merge $attrs (dict "aria-current" "true") -}}
-    {{- end -}}
-
+    {{- $current := $page.IsMenuCurrent .Menu . -}}
+    {{- $icon := index $icons (.Params.icon | default "") -}}
     <li>
-      <a{{ range $k, $v := $attrs }}{{ with $v }}{{ printf " %s=%q" $k $v | safeHTMLAttr }}{{ end }}{{ end }}
-        class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-200 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-400">
-        <span class="relative inline-block">
-          <span>{{ .Name }}</span>
-          <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-emerald-400 transition-all duration-300 group-hover:w-full"></span>
-        </span>
+      <a href="{{ .URL | relURL }}"{{ if $current }} aria-current="page"{{ end }}
+        class="press flex items-center gap-2.5 rounded-xl text-muted hover:bg-ink/5 hover:text-ink aria-[current=page]:bg-ink/10 aria-[current=page]:text-ink {{ if $compact }}p-1.75 pl-2.5 text-xs/4 font-medium{{ else }}p-2.5 pl-3 text-[0.8125rem]/5 font-medium{{ end }}">
+        {{- with $icon }}
+        <svg viewBox="0 0 16 16" fill="currentColor" class="shrink-0 {{ if $compact }}size-3{{ else }}size-3.5{{ end }}" aria-hidden="true">{{ . | safeHTML }}</svg>
+        {{- end }}
+        {{ .Name }}
       </a>
-
-      {{- with .Children }}
-      <ul class="pl-4 mt-1">
-        {{- partial "menu.html" (dict "menuID" $menuID "page" $page) -}}
-      </ul>
-      {{- end }}
     </li>
     {{- end }}
   </ul>

@@ -48,3 +48,24 @@ other = "Página inicial"
 
 [toggle_theme]
 other = "Alternar tema"
+
+[skip_to_content]
+other = "Pular para o conteúdo"
+
+[connect]
+other = "Contato"
+
+[main_navigation]
+other = "Navegação principal"
+
+[language]
+other = "Idioma"
+
+[theme_light]
+other = "Tema claro"
+
+[theme_system]
+other = "Tema do sistema"
+
+[theme_dark]
+other = "Tema escuro"

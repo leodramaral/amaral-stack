@@ -12,20 +12,35 @@ defaultContentLanguageInSubdir = true
 
     [languages.br.menus]
       [[languages.br.menus.main]]
+        name = 'Início'
+        pageRef = '/'
+        weight = 5
+        params = { icon = 'home' }
+      [[languages.br.menus.main]]
         name = 'Blog'
         pageRef = '/blog'
         weight = 10
+        params = { icon = 'pencil' }
+      [[languages.br.menus.main]]
+        name = 'Sobre'
+        pageRef = '/about'
+        weight = 20
+        params = { icon = 'user' }
 
     [languages.br.params]
+      name = "Leandro Amaral"
+      role = "Engenheiro de IA"
       avatar = "/perfil.jpg"
       homepage_description = "Blog pessoal e mini-currículo de Leandro Amaral — anotações sobre backend, IA e as ferramentas que uso no dia a dia."
 
       [[languages.br.params.socials]]
         link = "https://github.com/leodramaral"
         icon = "devicon-github-original"
+        name = "GitHub"
       [[languages.br.params.socials]]
         link = "https://www.linkedin.com/in/leodramaral/"
         icon = "devicon-linkedin-plain"
+        name = "LinkedIn"
 
   [languages.en]
     contentDir = 'content/en'
@@ -36,23 +51,39 @@ defaultContentLanguageInSubdir = true
 
     [languages.en.menus]
       [[languages.en.menus.main]]
+        name = 'Home'
+        pageRef = '/'
+        weight = 5
+        params = { icon = 'home' }
+      [[languages.en.menus.main]]
         name = 'Blog'
         pageRef = '/blog'
         weight = 10
+        params = { icon = 'pencil' }
+      [[languages.en.menus.main]]
+        name = 'About'
+        pageRef = '/about'
+        weight = 20
+        params = { icon = 'user' }
 
     [languages.en.params]
+      name = "Leandro Amaral"
+      role = "AI engineer"
       avatar = "/perfil.jpg"
       homepage_description = "Personal blog and mini-CV for Leandro Amaral — notes on backend, AI, and the tools I use day to day."
 
       [[languages.en.params.socials]]
         link = "https://github.com/leandroamaral"
         icon = "devicon-github-original"
+        name = "GitHub"
       [[languages.en.params.socials]]
         link = "https://linkedin.com/in/leandroamaral"
         icon = "devicon-linkedin-plain"
+        name = "LinkedIn"
       [[languages.en.params.socials]]
         link = "https://x.com/leandroamaral"
         icon = "devicon-twitter-original"
+        name = "X"
 
 [markup]
   [markup.goldmark]

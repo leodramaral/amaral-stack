@@ -1,156 +1,119 @@
-{{- /* header.html - top-level navbar for site */ -}}
-{{- /* Positioning (sticky top-0 z-50) lives on the <header> element in baseof.html, not here:
-   position: sticky is bounded by the element's own containing block, and this partial's root
-   div is wrapped tightly (same height) by <header> in the theme's baseof.html, leaving sticky
-   zero room to stick. <header>'s own parent is <body>, which spans the full page height. */ -}}
-  <nav class="w-full border-b border-gray-800 bg-[#070709]/95 backdrop-blur-sm text-gray-100">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      {{- /* h-16 (4rem): blog/list.html's "pt-24" and blog/single.html's "sticky top-24" both
-         hard-code clearance for this nav height. Update those two if this changes. */ -}}
-      <div class="flex items-center justify-between h-16">
-        <div class="flex items-center gap-3">
-          <a href='{{ .Site.BaseURL | relLangURL }}'
-            class="flex items-center gap-3 group rounded-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"
-            aria-label="{{ T "homepage" }}">
-            <span class="text-blue-200 text-lg sm:text-xl md:text-2xl lg:text-3xl font-mono font-semibold tracking-wide">
-              <span class="text-gray-500">{</span><span class="text-blue-400">amaral</span> <span class="text-gray-500">stack</span><span class="text-gray-500">}</span>
-              <span class="inline-block ml-2" style="animation: flicker 1.6s steps(2, end) infinite;">_</span>
-            </span>
-          </a>
+{{- /* Site chrome: fixed identity sidebar (lg+) and a sticky bar with a collapsible menu below lg.
+   Both live in #site-nav, which Swup swaps on every navigation so the current-page highlight
+   and the language links stay correct. The script after it sits outside the container and runs once. */ -}}
+<div id="site-nav">
+  <header class="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur-sm lg:hidden">
+    <div class="flex items-center justify-between px-5 py-3">
+      <a href="{{ "/" | relLangURL }}" class="inline-flex items-center gap-2.5 font-mono text-base font-medium text-ink sm:text-sm"
+        aria-label="{{ T "homepage" }}">
+        <span class="h-4 w-[3px] shrink-0 rounded-full bg-accent-deep" aria-hidden="true"></span>
+        {{ site.Title }}
+      </a>
+      <button type="button" id="nav-toggle" aria-controls="mobile-menu" aria-expanded="false" aria-label="{{ T "open_menu" }}"
+        class="press -mr-2 grid size-10 place-items-center rounded-md text-muted hover:text-ink">
+        <svg viewBox="0 0 16 16" fill="currentColor" class="size-4" aria-hidden="true"><path fill-rule="evenodd" d="M2 3.75A.75.75 0 0 1 2.75 3h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 3.75ZM2 8a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 8Zm0 4.25a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd"/></svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden border-t border-line px-5 py-4">
+      {{ partial "menu.html" (dict "menuID" "main" "page" . "compact" false) }}
+      <div class="mt-4 flex items-center justify-between gap-3 border-t border-line pt-4">
+        <div class="-mx-2 flex items-center gap-1">
+          {{- range site.Params.socials }}
+          <a href="{{ .link }}" target="_blank" rel="noopener" aria-label="{{ .name }}"
+            class="press grid size-9 place-items-center text-lg text-muted hover:text-ink"><i class="{{ .icon }}"></i></a>
+          {{- end }}
         </div>
-
-        <div class="flex items-center gap-4">
-          <div class="hidden md:flex items-center">
-            {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
-          </div>
-
-          <div class="flex items-center gap-1">
-            {{ $currentLang := site.Language.Lang }}
-            {{ $currentPage := . }}
-            {{ range site.Languages }}
-            {{ $targetLang := .Lang }}
-            {{ $targetURL := printf "/%s/" $targetLang | relURL }}
-            {{ range $currentPage.AllTranslations }}
-            {{ if eq .Language.Lang $targetLang }}
-            {{ $targetURL = .RelPermalink }}
-            {{ end }}
-            {{ end }}
-            {{ if eq .Lang $currentLang }}
-            <span
-              class="px-2 py-1 text-xs sm:text-sm border border-gray-500 rounded-sm text-white bg-gray-800">
-              {{ .LanguageName }}
-            </span>
-            {{ else }}
-            <a href="{{ $targetURL }}" data-no-swup
-              class="px-2 py-1 text-xs sm:text-sm border border-gray-700 rounded-sm text-gray-400 hover:text-white hover:border-gray-500 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400">
-              {{ .LanguageName }}
-            </a>
-            {{ end }}
-            {{ end }}
-          </div>
-
-          <button id="theme-toggle" aria-label="{{ T "toggle_theme" }}"
-            class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-colors duration-200 hover:bg-white/10">
-            <svg id="theme-icon-moon" class="h-5 w-5 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
-            <svg id="theme-icon-sun" class="h-5 w-5 text-gray-300 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-          </button>
-
-          <div class="md:hidden">
-            <button id="nav-toggle" aria-controls="mobile-menu" aria-expanded="false"
-              class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-400"
-              aria-label="{{ T "open_menu" }}">
-              <svg class="h-6 w-6 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div id="mobile-menu" class="md:hidden hidden pb-4">
-        {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
-        <div class="flex items-center gap-1 mt-3 pt-3 border-t border-gray-800">
-          {{ $currentLang := site.Language.Lang }}
-          {{ $currentPage := . }}
-          {{ range site.Languages }}
-          {{ $targetLang := .Lang }}
-          {{ $targetURL := printf "/%s/" $targetLang | relURL }}
-          {{ range $currentPage.AllTranslations }}
-          {{ if eq .Language.Lang $targetLang }}
-          {{ $targetURL = .RelPermalink }}
-          {{ end }}
-          {{ end }}
-          {{ if eq .Lang $currentLang }}
-          <span class="px-2 py-1 text-xs sm:text-sm border border-gray-500 rounded-sm text-white bg-gray-800">
-            {{ .LanguageName }}
-          </span>
-          {{ else }}
-          <a href="{{ $targetURL }}" data-no-swup
-            class="px-2 py-1 text-xs sm:text-sm border border-gray-700 rounded-sm text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400">
-            {{ .LanguageName }}
-          </a>
-          {{ end }}
-          {{ end }}
-        </div>
+        {{ partial "lang-switch.html" . }}
+        {{ partial "theme-toggle.html" . }}
       </div>
     </div>
-  </nav>
+  </header>
 
-  <style>
-    @keyframes flicker {
-      0% { opacity: 1; transform: translateY(0); }
-      10% { opacity: 0.2; transform: translateY(-1px); }
-      20% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 1; }
-    }
-    @keyframes border-breathe {
-      0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.06); }
-      50% { box-shadow: 0 0 18px 6px rgba(99, 102, 241, 0.03); }
-      100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.06); }
-    }
-  </style>
+  <aside class="fixed inset-y-0 left-0 z-30 w-72 flex-col overflow-y-auto p-6 max-lg:hidden lg:flex">
+    <div>
+      <a href="{{ "/" | relLangURL }}" aria-label="{{ T "homepage" }}">
+        <img src="{{ site.Params.avatar | relURL }}" alt="" width="96" height="96"
+          class="size-12 rounded-full border border-line bg-shell object-cover">
+      </a>
+      <p class="mt-4 font-display text-[0.8125rem] font-bold tracking-tight">{{ site.Params.name }}</p>
+      <p class="section-label mt-1 text-muted">{{ site.Params.role }}</p>
+    </div>
+    <p class="mt-4 font-mono text-[0.6875rem]/4.5 text-pretty text-muted">{{ site.Params.homepage_description }}</p>
 
-  <script>
-    (function () {
-      const btn = document.getElementById('nav-toggle');
-      const menu = document.getElementById('mobile-menu');
-      if (!btn || !menu) return;
-      btn.addEventListener('click', () => {
-        const open = menu.classList.toggle('hidden') === false;
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    <div class="mt-7 -mx-2.5">
+      {{ partial "menu.html" (dict "menuID" "main" "page" . "compact" true) }}
+    </div>
+
+    <div class="mt-auto pt-8">
+      <p class="section-label text-muted">{{ T "connect" }}</p>
+      <div class="-mx-2 mt-2 flex items-center gap-1">
+        {{- range site.Params.socials }}
+        <a href="{{ .link }}" target="_blank" rel="noopener" aria-label="{{ .name }}"
+          class="press grid size-9 place-items-center text-lg text-muted hover:text-ink"><i class="{{ .icon }}"></i></a>
+        {{- end }}
+      </div>
+      <div class="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
+        {{ partial "lang-switch.html" . }}
+        {{ partial "theme-toggle.html" . }}
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+
+    function stored() {
+      try { var t = localStorage.getItem('theme'); return t === 'light' || t === 'dark' ? t : 'system'; }
+      catch (e) { return 'system'; }
+    }
+
+    function effective(choice) {
+      if (choice !== 'system') return choice;
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    function syncToggles() {
+      var choice = stored();
+      document.querySelectorAll('[data-set-theme]').forEach(function (b) {
+        var on = b.dataset.setTheme === choice;
+        b.toggleAttribute('data-active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
       });
-    })();
+    }
 
-    (function () {
-      const toggle = document.getElementById('theme-toggle');
-      const sun = document.getElementById('theme-icon-sun');
-      const moon = document.getElementById('theme-icon-moon');
-      if (!toggle) return;
+    function announce() {
+      window.dispatchEvent(new CustomEvent('theme-changed', { detail: { theme: effective(stored()) } }));
+    }
 
-      function applyIcons() {
-        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-        sun.classList.toggle('hidden', !isLight);
-        moon.classList.toggle('hidden', isLight);
+    document.addEventListener('click', function (e) {
+      var set = e.target.closest('[data-set-theme]');
+      if (set) {
+        var choice = set.dataset.setTheme;
+        if (choice === 'system') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', choice);
+        try { if (choice === 'system') localStorage.removeItem('theme'); else localStorage.setItem('theme', choice); } catch (err) {}
+        syncToggles();
+        announce();
+        return;
       }
+      var burger = e.target.closest('#nav-toggle');
+      if (burger) {
+        var menu = document.getElementById('mobile-menu');
+        var open = menu.classList.toggle('hidden') === false;
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+    });
 
-      applyIcons();
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function () {
+      if (stored() === 'system') announce();
+    });
 
-      toggle.addEventListener('click', () => {
-        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-        const next = isLight ? 'dark' : 'light';
-        if (next === 'light') {
-          document.documentElement.setAttribute('data-theme', 'light');
-        } else {
-          document.documentElement.removeAttribute('data-theme');
-        }
-        localStorage.setItem('theme', next);
-        applyIcons();
-        window.dispatchEvent(new CustomEvent('theme-changed', { detail: { theme: next } }));
-      });
-    })();
-  </script>
+    syncToggles();
+    function hookSwup() {
+      if (window.swup) window.swup.hooks.on('page:view', syncToggles);
+      else setTimeout(hookSwup, 100);
+    }
+    hookSwup();
+  })();
+</script>

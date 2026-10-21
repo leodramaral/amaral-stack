@@ -1,0 +1,18 @@
+{{- /* Language pills; each links to the current page's translation when one exists. */ -}}
+{{- $currentLang := site.Language.Lang -}}
+{{- $currentPage := . -}}
+<div class="flex items-center gap-1" role="group" aria-label="{{ T "language" }}">
+  {{- range site.Languages }}
+  {{- $targetLang := .Lang }}
+  {{- $targetURL := printf "/%s/" $targetLang | relURL }}
+  {{- range $currentPage.AllTranslations }}
+  {{- if eq .Language.Lang $targetLang }}{{ $targetURL = .RelPermalink }}{{ end }}
+  {{- end }}
+  {{- if eq .Lang $currentLang }}
+  <span aria-current="true" class="meta-mono rounded-full border border-line bg-canvas px-2.5 py-1 text-ink ring-1 ring-line">{{ .LanguageName }}</span>
+  {{- else }}
+  <a href="{{ $targetURL }}" data-no-swup hreflang="{{ .LanguageCode }}"
+    class="press meta-mono rounded-full border border-transparent px-2.5 py-1 text-muted hover:text-ink">{{ .LanguageName }}</a>
+  {{- end }}
+  {{- end }}
+</div>

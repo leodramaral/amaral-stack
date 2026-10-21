@@ -48,3 +48,24 @@ other = "Homepage"
 
 [toggle_theme]
 other = "Toggle theme"
+
+[skip_to_content]
+other = "Skip to content"
+
+[connect]
+other = "Connect"
+
+[main_navigation]
+other = "Main navigation"
+
+[language]
+other = "Language"
+
+[theme_light]
+other = "Light theme"
+
+[theme_system]
+other = "System theme"
+
+[theme_dark]
+other = "Dark theme"

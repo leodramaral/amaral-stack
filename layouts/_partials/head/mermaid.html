@@ -5,7 +5,9 @@
   let currentMermaidTheme = 'dark';
 
   function getTheme() {
-    return document.documentElement.getAttribute('data-theme') === 'light' ? 'default' : 'dark';
+    const chosen = document.documentElement.getAttribute('data-theme');
+    const light = chosen ? chosen === 'light' : window.matchMedia('(prefers-color-scheme: light)').matches;
+    return light ? 'default' : 'dark';
   }
 
   function renderMermaid() {
