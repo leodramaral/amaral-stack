@@ -31,7 +31,7 @@ defaultContentLanguageInSubdir = true
       name = "Leandro Amaral"
       role = "Engenheiro de IA"
       hero_title = "Anotações sobre backend, IA e as ferramentas do dia a dia."
-      avatar = "/perfil.jpg"
+      avatar = "perfil.jpg"
       homepage_description = "Blog pessoal e mini-currículo de Leandro Amaral — anotações sobre backend, IA e as ferramentas que uso no dia a dia."
 
       [[languages.br.params.socials]]
@@ -71,7 +71,7 @@ defaultContentLanguageInSubdir = true
       name = "Leandro Amaral"
       role = "AI engineer"
       hero_title = "Notes on backend, AI, and the tools I use day to day."
-      avatar = "/perfil.jpg"
+      avatar = "perfil.jpg"
       homepage_description = "Personal blog and mini-CV for Leandro Amaral — notes on backend, AI, and the tools I use day to day."
 
       [[languages.en.params.socials]]

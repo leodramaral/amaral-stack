@@ -4,7 +4,7 @@
 <div class="flex items-center gap-1" role="group" aria-label="{{ T "language" }}">
   {{- range site.Languages }}
   {{- $targetLang := .Lang }}
-  {{- $targetURL := printf "/%s/" $targetLang | relURL }}
+  {{- $targetURL := printf "%s/" $targetLang | relURL }}
   {{- range $currentPage.AllTranslations }}
   {{- if eq .Language.Lang $targetLang }}{{ $targetURL = .RelPermalink }}{{ end }}
   {{- end }}
