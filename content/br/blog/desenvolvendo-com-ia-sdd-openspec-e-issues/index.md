@@ -10,7 +10,7 @@ description: "Como uso Spec-Driven Development com OpenSpec e Issues do GitHub p
 
 Quando um agente de IA escreve código rápido, o difícil deixa de ser digitar e passa a ser **saber o que foi pedido, o que foi feito e se está certo**. Sem isso, sobra muito código que parece certo e que ninguém sabe explicar logo depois.
 
-Para lidar com isso, uso um fluxo simples num projeto pessoal, um [gestor financeiro em Django](https://github.com/leodramaral/projeto-gestor-financeiro). O método se chama **Spec-Driven Development (SDD)**: primeiro escrevo o que vai ser feito, depois reviso, e só então o agente implementa. Para isso uso o **OpenSpec**, e para dar um ponto de partida a cada trabalho, as **Issues do GitHub**.
+Para lidar com isso, uso um fluxo simples no meu dia a dia. Para mostrá-lo, vou usar um projeto pessoal, um [gestor financeiro em Django](https://github.com/leodramaral/projeto-gestor-financeiro). O método se chama **Spec-Driven Development (SDD)**: primeiro escrevo o que vai ser feito, depois reviso, e só então o agente implementa. Para isso uso o **OpenSpec**, e para dar um ponto de partida a cada trabalho, as **Issues do GitHub**.
 
 ## Uma regra só
 
@@ -85,6 +85,14 @@ A [Issue #9](https://github.com/leodramaral/projeto-gestor-financeiro/issues/9) 
 - **Eu reviso o texto, não só o código.** Concordar com uma página de especificação é mais fácil do que entender um diff de dezenas de arquivos.
 - **O agente tem um critério de fim.** "Pronto" quer dizer tasks conferidas, não código que compila.
 - **O histórico explica as decisões.** Daqui a meses, "por que a lista e não os cartões?" tem resposta escrita, e não depende de ninguém lembrar, muito menos do agente, que não guarda conversa nenhuma.
+
+## Por que OpenSpec e não Spec Kit
+
+Existem outras ferramentas para SDD, e a mais conhecida é o Spec Kit, do próprio GitHub. Sei que hoje ele é o mais adotado pelo mercado. Eu o achei burocrático para o meu uso, pela quantidade de arquivos e de etapas que ele traz.
+
+O OpenSpec me pareceu mais enxuto. A change tem só quatro documentos, e o fluxo cabe em poucos comandos.
+
+Ainda pretendo testar o Spec Kit em algum projeto. Por enquanto, o OpenSpec está me atendendo bem.
 
 ## O que custa
 

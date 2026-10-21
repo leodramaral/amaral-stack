@@ -10,7 +10,7 @@ description: "How I use Spec-Driven Development with OpenSpec and GitHub Issues 
 
 When an AI agent writes code fast, the hard part stops being typing and becomes **knowing what was asked, what was done and whether it is right**. Without that, you are left with a lot of code that looks right and that nobody can explain shortly after.
 
-To deal with this, I use a simple workflow on a personal project, a [finance manager built with Django](https://github.com/leodramaral/projeto-gestor-financeiro). The method is called **Spec-Driven Development (SDD)**: I first write what is going to be done, then I review it, and only then does the agent implement. For that I use **OpenSpec**, and to give each piece of work a starting point, **GitHub Issues**.
+To deal with this, I use a simple workflow in my day-to-day work. To show it, I will use a personal project, a [finance manager built with Django](https://github.com/leodramaral/projeto-gestor-financeiro). The method is called **Spec-Driven Development (SDD)**: I first write what is going to be done, then I review it, and only then does the agent implement. For that I use **OpenSpec**, and to give each piece of work a starting point, **GitHub Issues**.
 
 ## One rule
 
@@ -85,6 +85,14 @@ Whatever shows up along the way has a clear destination. If it is part of the sc
 - **I review the text, not just the code.** Agreeing with a page of specification is easier than understanding a diff of dozens of files.
 - **The agent has a finish line.** "Done" means tasks checked, not code that compiles.
 - **The history explains the decisions.** Months from now, "why the list and not the cards?" has a written answer, and it does not depend on anyone remembering, least of all the agent, which keeps no conversation at all.
+
+## Why OpenSpec and not Spec Kit
+
+There are other tools for SDD, and the best known is Spec Kit, from GitHub itself. I know it is the most widely adopted in the market today. I found it too bureaucratic for my use, because of the number of files and steps it brings.
+
+OpenSpec felt leaner to me. A change has just four documents, and the flow fits in a few commands.
+
+I still plan to try Spec Kit on a project. For now, OpenSpec is working well for me.
 
 ## What it costs
 
