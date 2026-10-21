@@ -8,9 +8,9 @@ tags: ["sdd", "openspec", "github", "ai", "claude-code", "development-workflow"]
 description: "How I use Spec-Driven Development with OpenSpec and GitHub Issues to plan, review and only then implement with AI agents, on a real project."
 ---
 
-When an AI agent writes code fast, the hard part stops being typing and becomes **knowing what was asked, what was done and whether it is right**. Without that, you are left with a lot of code that looks right and that nobody can explain shortly after.
+I currently use **Spec-Driven Development (SDD)** in my development workflow, applied with **OpenSpec**. The idea is to first write what is going to be done, then review it, and only then let the AI agent implement. Each piece of work starts from a **GitHub Issue**, which is the basis for the proposal.
 
-To deal with this, I use a simple workflow in my day-to-day work. To show it, I will use a personal project, a [finance manager built with Django](https://github.com/leodramaral/projeto-gestor-financeiro). The method is called **Spec-Driven Development (SDD)**: I first write what is going to be done, then I review it, and only then does the agent implement. For that I use **OpenSpec**, and to give each piece of work a starting point, **GitHub Issues**.
+To show how this works, I will use a personal project, a [finance manager built with Django](https://github.com/leodramaral/projeto-gestor-financeiro).
 
 ## One rule
 

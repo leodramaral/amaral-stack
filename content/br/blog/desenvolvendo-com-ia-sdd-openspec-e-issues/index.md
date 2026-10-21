@@ -8,9 +8,9 @@ tags: ["sdd", "openspec", "github", "ia", "claude-code", "fluxo-de-desenvolvimen
 description: "Como uso Spec-Driven Development com OpenSpec e Issues do GitHub para planejar, revisar e só depois implementar com agentes de IA, num projeto real."
 ---
 
-Quando um agente de IA escreve código rápido, o difícil deixa de ser digitar e passa a ser **saber o que foi pedido, o que foi feito e se está certo**. Sem isso, sobra muito código que parece certo e que ninguém sabe explicar logo depois.
+Atualmente uso o **Spec-Driven Development (SDD)** no meu fluxo de desenvolvimento, aplicado com o **OpenSpec**. A ideia é primeiro escrever o que vai ser feito, depois revisar, e só então deixar o agente de IA implementar. Cada trabalho começa numa **Issue do GitHub**, que serve de base para a proposta.
 
-Para lidar com isso, uso um fluxo simples no meu dia a dia. Para mostrá-lo, vou usar um projeto pessoal, um [gestor financeiro em Django](https://github.com/leodramaral/projeto-gestor-financeiro). O método se chama **Spec-Driven Development (SDD)**: primeiro escrevo o que vai ser feito, depois reviso, e só então o agente implementa. Para isso uso o **OpenSpec**, e para dar um ponto de partida a cada trabalho, as **Issues do GitHub**.
+Para mostrar como isso funciona, vou usar um projeto pessoal, um [gestor financeiro em Django](https://github.com/leodramaral/projeto-gestor-financeiro).
 
 ## Uma regra só
 
