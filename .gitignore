@@ -5,3 +5,6 @@ resources/
 .claude/
 .impeccable/
 .playwright-mcp/
+
+# CV contains personal contact data; never publish
+Curriculo-*.pdf

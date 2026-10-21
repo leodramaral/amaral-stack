@@ -3,9 +3,7 @@ title: "Sobre"
 date: 2026-09-02T10:00:00-03:00
 draft: false
 translationKey: "about"
-description: "Desenvolvedor fullstack sênior migrando para engenharia de IA — construindo sistemas que usam IA, sistemas que rodam IA e análises de dados apoiadas por IA."
+description: "Desenvolvedor fullstack com mais de 10 anos de estrada, hoje trabalhando com Python e TypeScript e com IA no dia a dia."
 ---
 
-Hoje atuo como engenheiro de IA, construindo sistemas que usam IA e sistemas que rodam IA: plataformas conversacionais que permitem consultas em linguagem natural sobre dados de negócio, os serviços e pipelines que sustentam esses agentes em produção, e análises de dados apoiadas por IA para transformar informação complexa em decisão.
-
-Cheguei até aqui depois de 10 anos como desenvolvedor de software — boa parte deles como fullstack sênior e líder técnico, com base sólida em React/TypeScript no frontend e Node.js/NestJS no backend, além de bancos de dados e cloud AWS.
+Sou desenvolvedor há mais de 10 anos. Atualmente trabalho principalmente com Python e TypeScript, usando IA no dia a dia para construir software e trabalhar com dados. Antes disso, já passei por React, Node.js, bancos de dados e AWS.
